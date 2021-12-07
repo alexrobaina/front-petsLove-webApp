@@ -1,7 +1,9 @@
-# Tempate - react - web3
+# Pets love 
 
-The project is made with typescript and react js. Add different libraries and various components that I usually use in my projects and I am modifying as needed.
+This app is to create users with diferents roles when Shelters can create pets and link users adopters and users Vet
 
+The goal is that users can interact and track the progress of pets
+<!-- 
 ##
 
 In the structure of the project you can find the store with redux, redux-toolkit and sagas as an example so that you can see my knowledge in these technologies together with test examples.
@@ -13,7 +15,7 @@ To do the tests with MetaMask it is necessary to have the "MetaMask" extension i
 
 Deploy example:
 https://challenge-web3.vercel.app/
-
+ -->
 ## Install some libraries that I think help maintain good practices
 
 eslint
@@ -30,7 +32,7 @@ I recommend installing node v14.16.0 version to install the packages
 Run in the terminal
 
 ```
-$ cd challenge-web3
+$ cd front-petsLove-webApp
 ```
 
 ```
