@@ -1,0 +1,28 @@
+@import '../../../styles/mixings.scss';
+
+.row {
+  padding: 0 300px 0 300px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+
+  @include media-breakpoint-between(xs, sm) {
+    padding: 0 15px 0 15px;
+  }
+
+  @include media-breakpoint-between(sm, md) {
+    padding: 0 200px 0 200px;
+  }
+
+  @include media-breakpoint-between(md, xl) {
+    padding: 0 300px 0 300px;
+  }
+
+  @include media-breakpoint-between(xl, xxl) {
+    padding: 0 500px 0 500px;
+  }
+
+  &.center {
+    align-items: center;
+  }
+}

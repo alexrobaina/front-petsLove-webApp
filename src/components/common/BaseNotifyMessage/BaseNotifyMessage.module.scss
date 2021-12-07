@@ -1,0 +1,28 @@
+.container {
+  border-radius: 4px;
+  margin-top: 20px;
+  background-color: var(--error-background-color);
+  padding: 18px 21px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &.isOpen {
+    display: none;
+  }
+}
+
+.message {
+  font-family: var(--main-font);
+  width: 100%;
+  color: var(--error-message-color);
+  padding: 0 13px 0 13px;
+}
+
+.close {
+  color: var(--error-message-color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

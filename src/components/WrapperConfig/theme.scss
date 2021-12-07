@@ -1,0 +1,81 @@
+@import '../../styles/mixings.scss';
+
+:root {
+  --dark: #000;
+  --ligth: #fff;
+  --sea-pink: #ef9a9a;
+  --red-error: #bb002f;
+  --sail: #a6d0f3;
+  --grey: #88a9b9;
+  --hawkes-blue: #e3f2fd;
+  --black-russian: #0e0033;
+  --periwinkle-grey: #dee3f2;
+  --anakiwa: #9dcde4;
+  --hawkes-blue: #e3f2fd;
+  --outer-space: #303538;
+  --denimapprox: #1565c0;
+}
+
+:root .dark {
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+
+  //fonts
+  --main-font: 'Poppins', sans-serif;
+
+  --main-background: var(--dark);
+
+  --base-text-color: var(--ligth);
+
+  --button-background: var(--anakiwa);
+  --button-text: var(--dark);
+  --button-background-disabled-text: var(--periwinkle-grey);
+
+  --input-border-color: var(--anakiwa);
+  --input-focus: var(--denimapprox);
+  --input-hover: var(--denimapprox);
+  --input-error: var(--sea-pink);
+  --input-icon-eye-password: var(--anakiwa);
+  --input-placeholder: #3a525e;
+
+  --error-background-color: var(--red-error);
+  --error-message-color: var(--ligth);
+
+  --border-card-color: var(--outer-space);
+
+  --loading-ring: var(--anakiwa);
+
+  --label-text-color: var(--ligth);
+}
+
+:root .light {
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+
+  //fonts
+  --main-font: 'Poppins', sans-serif;
+
+  --main-background: var(--ligth);
+
+  --base-text-color: var(--dark);
+
+  --button-background: var(--anakiwa);
+  --button-text: var(--dark);
+  --button-background-disabled-text: var(--periwinkle-grey);
+
+  --input-border-color: var(--anakiwa);
+  --input-focus: var(--denimapprox);
+  --input-hover: var(--denimapprox);
+  --input-error: var(--sea-pink);
+  --input-icon-eye-password: var(--anakiwa);
+  --input-placeholder: var(--sail);
+
+  --error-background-color: var(--red-error);
+  --error-message-color: var(--ligth);
+
+  --border-card-color: var(--hawkes-blue);
+
+  --loading-ring: var(--anakiwa);
+
+  --label-text-color: var(--dark);
+}
