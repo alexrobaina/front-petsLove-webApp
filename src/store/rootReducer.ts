@@ -1,8 +1,8 @@
 // Leer documentación también.
 import { combineReducers } from '@reduxjs/toolkit';
 
-import accountReducer from './slices/account';
+import loginReducer from './slices/login';
 
 export default combineReducers({
-  account: accountReducer,
+  login: loginReducer,
 });

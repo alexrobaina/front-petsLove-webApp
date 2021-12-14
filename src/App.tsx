@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import navigation from './navigation/navigation';
 import WrapperConfig from './components/WrapperConfig';
 import store from './store';
+import Login from './views/Login';
 import './App.scss';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Switch>
           <WrapperConfig>
             <>
+              <Route exact path="/login" component={Login} />;
               {navigation.map((nav: { path: string; component: ComponentType }) => {
                 return <Route key={nav.path} path={nav.path} component={nav.component} />;
               })}

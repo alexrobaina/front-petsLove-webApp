@@ -1,12 +1,13 @@
 import { testSaga } from 'redux-saga-test-plan';
-import * as signUpActions from '../../slices/account';
-import * as signUpSagasRoot from '../account';
+import * as loginActions from '../../slices/login';
+import * as loginSagasRoot from '../login';
 import { axiosMock } from '../../../__mocks__/axiosMock';
 
 describe('EXAMPLE sagas', () => {
   const dataMock = {
     payload: {
-      address: '12csa',
+      email: '12csa',
+      password: '12csa',
     },
   };
 
@@ -15,16 +16,16 @@ describe('EXAMPLE sagas', () => {
   });
 
   describe.skip('EXPAMPLEWorker:', () => {
-    test.skip('Should put accountStart action, call api and put accountSuccess action with payload', async () => {
+    test.skip('Should put loginStart action, call api and put loginSuccess action with payload', async () => {
       axiosMock.post.mockImplementationOnce(() => Promise.resolve({ data: {} }));
-      const accountSaga = testSaga(signUpSagasRoot.connectAcconuntWorker, dataMock);
+      const loginSaga = testSaga(loginSagasRoot.loginWorker, dataMock);
 
-      accountSaga
+      loginSaga
         .next()
-        .put(signUpActions.accountStart())
+        .put(loginActions.loginStart())
         .next()
         .next()
-        .put(signUpActions.accountSuccess({ message: undefined }))
+        .put(loginActions.loginSuccess({ message: undefined }))
         .next()
         .isDone();
     });

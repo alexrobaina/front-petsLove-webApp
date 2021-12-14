@@ -10,6 +10,7 @@ interface Props {
   pointer?: boolean;
   marginTop?: number;
   marginLeft?: number;
+  onClick?: () => void;
   marginRight?: number;
   marginBottom?: number;
 }
@@ -24,9 +25,11 @@ const BaseTitle: FC<Props> = ({
   marginLeft,
   marginRight,
   marginBottom,
+  onClick = () => {},
 }) => {
   return (
     <div
+      onClick={() => onClick()}
       data-testid={`title-${testId}`}
       style={{ fontSize, marginTop, marginLeft, marginRight, marginBottom }}
       className={c(styles.title, center && styles.center, pointer && styles.pointer)}

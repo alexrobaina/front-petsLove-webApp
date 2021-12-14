@@ -1,14 +1,21 @@
-import { ReactElement, FC, useState, useCallback, useEffect } from "react";
-import Header from "../Header";
-import { DARK, LIGHT } from "../Header/contants";
-import "./theme.scss";
+import { ReactElement, FC, useState, useCallback, useEffect } from 'react';
+import { IntlProvider } from 'react-intl';
+import Header from '../Header';
+import spanishAR from '../../languages/es-AR.json';
+import { DARK, LIGHT } from '../Header/contants';
+import './theme.scss';
 
 interface Props {
   children: ReactElement;
 }
 
 const WrapperConfig: FC<Props> = ({ children }) => {
+  const local = navigator.language;
   const [theme, setTheme] = useState(LIGHT);
+
+  const getLanguage = () => {
+    return spanishAR;
+  };
 
   const changeThemne = useCallback((selectedTheme: string) => {
     setTheme(selectedTheme);
@@ -27,10 +34,12 @@ const WrapperConfig: FC<Props> = ({ children }) => {
   }, [changeThemne]);
 
   return (
-    <div data-testid="wrapperConfig-app">
-      <Header changeTheme={changeThemne} theme={theme} />
-      {children}
-    </div>
+    <IntlProvider locale={local} messages={getLanguage()}>
+      <div data-testid="wrapperConfig-app">
+        <Header changeTheme={changeThemne} theme={theme} />
+        {children}
+      </div>
+    </IntlProvider>
   );
 };
 

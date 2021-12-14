@@ -1,15 +1,9 @@
-import reducer, * as account from '../account';
-import { initialState } from '../account';
+import reducer, * as account from '../login';
+import { initialState } from '../login';
 
 describe('EXAMPLE account slice', () => {
-  const payloadMock = {
-    payload: {
-      data: {},
-    },
-  };
-
-  test('accountStart action', () => {
-    const slice = reducer(initialState, account.accountStart());
+  test('loginStart action', () => {
+    const slice = reducer(initialState, account.loginStart());
     expect(slice.isLoading).toBe(true);
     expect(slice.error).toBe(false);
     expect(slice.data).toEqual({});

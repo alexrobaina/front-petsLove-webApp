@@ -1,0 +1,28 @@
+.container {
+  justify-content: center;
+}
+
+.columns {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.containerAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerAccount {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.containerBalance {
+  display: flex;
+  margin-top: 40px;
+  justify-content: space-between;
+  border: 1px solid var(--border-card-color);
+}

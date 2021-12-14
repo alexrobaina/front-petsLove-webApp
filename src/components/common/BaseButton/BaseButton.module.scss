@@ -10,6 +10,7 @@
   cursor: pointer;
   transition: 0.3s;
   font-family: var(--main-font);
+  color: var(--button-text);
 }
 
 .buttonPrimary {
@@ -18,6 +19,10 @@
   width: 312px;
   height: 48px;
   transition: 0.3s;
+
+  &:hover {
+    background-color: var(--button-hover-background);
+  }
 }
 
 .isButtonLink {

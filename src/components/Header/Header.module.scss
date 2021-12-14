@@ -3,10 +3,10 @@
 .header {
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  height: 60px;
   padding: 10px 15px;
   align-items: center;
-  background-color: var(--main-background);
+  background-color: var(--header-background);
 
   transition-duration: 0.3s;
   transition-timing-function: linear;
@@ -18,4 +18,9 @@
   @include media-breakpoint-between(sm, xxl) {
     padding: 10px ​15px 0 15px;
   }
+}
+
+.containerNavegation {
+  display: flex;
+  gap: 50px;
 }
