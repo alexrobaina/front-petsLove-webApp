@@ -49,7 +49,7 @@
   transition-duration: 0.3s;
   transition-timing-function: linear;
 
-  //fonts
+  --header-background: var(--pale-navy);
   --main-background: var(--dark);
 
   --base-text-color: var(--deep-navy);
@@ -58,7 +58,7 @@
   --button-text: var(--dark);
   --button-background-disabled-text: var(--grey-light);
   --button-hover-background: var(--light-blue);
-  --button-hover-text: var(--bright-pink);
+  --button-hover-text: var(--pale-navy);
 
   --input-border-color: var(--light-blue);
   --input-focus: var(--bright-pink);

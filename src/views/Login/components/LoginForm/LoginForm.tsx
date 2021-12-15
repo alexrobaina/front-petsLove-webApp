@@ -6,6 +6,7 @@ import BaseInput from '../../../../components/common/BaseInput';
 import BaseButton from '../../../../components/common/BaseButton';
 import BaseTitle from '../../../../components/common/BaseTitle';
 import { VARIANTS_OPACITY } from '../../../../constants/animation';
+import { useTranslate } from '../../../../hooks/useTranslate';
 import styles from './LoginForm.module.scss';
 
 interface Props {
@@ -27,6 +28,8 @@ const LoginForm: FC<Props> = ({
   goToRegister,
   goToForgotPassword,
 }) => {
+  const { t } = useTranslate();
+
   return (
     <div data-testid={`form-container-${testId}`} className={styles.container}>
       <form onSubmit={submitForm} className={styles.columns}>
@@ -37,34 +40,54 @@ const LoginForm: FC<Props> = ({
           variants={VARIANTS_OPACITY}
           transition={{ ease: 'easeOut', delay: 0.2 }}
         >
-          <BaseTitle center marginTop={40} marginBottom={60} fontSize={30} text="Login" />
+          <BaseTitle
+            center
+            fontSize={30}
+            marginTop={40}
+            marginBottom={60}
+            text={t('common.login')}
+          />
           <BaseInput
             type="text"
-            label="Emial"
             marginTop={10}
             testId={testId}
             inputName="email"
             value={values.email}
-            errorMessage={errors.email}
+            label={t('common.email')}
             handleChange={handleChange}
             placeholder="alexgomez@gmail.com"
+            errorMessage={t(errors.email || '')}
           />
           <BaseInput
             type="text"
             marginTop={10}
             testId={testId}
-            label="Password"
             inputName="password"
             placeholder="Pasword"
             value={values.password}
             handleChange={handleChange}
-            errorMessage={errors.password}
+            label={t('common.password')}
+            errorMessage={t(errors.password || '')}
           />
           <BaseButton large type="submit" text="Login" marginTop={30} />
+          <div className={styles.containerActions}>
+            <BaseButton
+              small
+              isButtonLink
+              fontSize={18}
+              text="Registrarme"
+              onClick={goToRegister}
+            />
+            <BaseButton
+              small
+              isButtonLink
+              fontSize={18}
+              onClick={goToForgotPassword}
+              text={t('common.forgotPassword')}
+            />
+          </div>
         </motion.div>
       </form>
-      <BaseButton text="Registrarme" isButtonLink onClick={goToRegister} />
-      <BaseButton text="Olvidé mi contraseña" isButtonLink onClick={goToForgotPassword} />
     </div>
   );
 };

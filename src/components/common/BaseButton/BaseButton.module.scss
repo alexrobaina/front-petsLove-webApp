@@ -43,6 +43,12 @@
   }
 }
 
+.small {
+  @include media-breakpoint-between(xs, md) {
+    font-size: 14px !important;
+  }
+}
+
 .icon {
   display: flex;
   align-items: center;
@@ -62,12 +68,6 @@
   color: var(--button-text);
   background-color: var(--button-background-disabled-text);
   opacity: 0.5;
-}
-
-.small {
-  width: 100px;
-  display: flex;
-  justify-content: center;
 }
 
 .medium {

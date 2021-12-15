@@ -2,6 +2,7 @@ import { ReactElement, FC, useState, useCallback, useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import Header from '../Header';
 import spanishAR from '../../languages/es-AR.json';
+import englishUS from '../../languages/en-US.json';
 import { DARK, LIGHT } from '../Header/contants';
 import './theme.scss';
 
@@ -13,8 +14,8 @@ const WrapperConfig: FC<Props> = ({ children }) => {
   const local = navigator.language;
   const [theme, setTheme] = useState(LIGHT);
 
-  const getLanguage = () => {
-    return spanishAR;
+  const getLanguage = (lang: string) => {
+    return lang === 'EN-US' ? englishUS : spanishAR;
   };
 
   const changeThemne = useCallback((selectedTheme: string) => {
@@ -34,7 +35,7 @@ const WrapperConfig: FC<Props> = ({ children }) => {
   }, [changeThemne]);
 
   return (
-    <IntlProvider locale={local} messages={getLanguage()}>
+    <IntlProvider locale={local} messages={getLanguage('es-AR')}>
       <div data-testid="wrapperConfig-app">
         <Header changeTheme={changeThemne} theme={theme} />
         {children}

@@ -4,12 +4,13 @@ const sliceName = 'login';
 
 export const initialState = {
   data: {},
+  token: '',
   isLoading: false,
   error: false,
   success: false,
 };
 
-const accountSlice = createSlice({
+const loginSlice = createSlice({
   name: sliceName,
   initialState,
   reducers: {
@@ -19,7 +20,9 @@ const accountSlice = createSlice({
       state.isLoading = true;
     },
     loginSuccess(state, { payload }) {
+      localStorage.setItem('token', payload.data.token);
       state.data = payload;
+      state.token = payload.data.token;
       state.isLoading = false;
       state.error = false;
       state.success = true;
@@ -39,11 +42,10 @@ const accountSlice = createSlice({
   },
 });
 
-const { actions, reducer } = accountSlice;
+const { actions, reducer } = loginSlice;
 
 export const { loginStart, loginSuccess, loginFailure, cleanErrors } = actions;
 
-// export const getAccount = createAction<{}>(`${sliceName}/getAccount`);
 export const login = createAction<{ email: string; password: string }>(
   `${sliceName}/login`,
 );
