@@ -1,10 +1,10 @@
 {
-  "common.loading": "Cargando",
-  "common.validationRequired": "Este campo es requerido.",
-  "common.forgotPassword": "Olvidé mi contraseña.",
+  "common.loading": "Loading",
+  "common.validationRequired": "This field is required.",
+  "common.forgotPassword": "Forgot password.",
   "common.login": "Login",
   "common.email": "Email",
   "common.password": "Password",
   "common.signUp": "Sign up",
-  "validationEmail": "El email no es correcto."
+  "validationEmail": "The email format is incorrect."
 }

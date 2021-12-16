@@ -13,9 +13,11 @@ interface Props {
 const WrapperConfig: FC<Props> = ({ children }) => {
   const local = navigator.language;
   const [theme, setTheme] = useState(LIGHT);
+  const [langSelected, setLangSelected] = useState(englishUS);
 
-  const getLanguage = (lang: string) => {
-    return lang === 'EN-US' ? englishUS : spanishAR;
+  const setLanguage = (lang: string) => {
+    if (lang === 'en-US') return setLangSelected(englishUS);
+    return setLangSelected(spanishAR);
   };
 
   const changeThemne = useCallback((selectedTheme: string) => {
@@ -35,9 +37,9 @@ const WrapperConfig: FC<Props> = ({ children }) => {
   }, [changeThemne]);
 
   return (
-    <IntlProvider locale={local} messages={getLanguage('es-AR')}>
+    <IntlProvider locale={local} messages={langSelected}>
       <div data-testid="wrapperConfig-app">
-        <Header changeTheme={changeThemne} theme={theme} />
+        <Header setLanguage={setLanguage} changeTheme={changeThemne} theme={theme} />
         {children}
       </div>
     </IntlProvider>

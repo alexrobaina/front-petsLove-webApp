@@ -2,9 +2,9 @@
   "common.loading": "Cargando",
   "common.validationRequired": "Este campo es requerido.",
   "common.forgotPassword": "Olvidé mi contraseña.",
-  "common.login": "Login",
-  "common.email": "Email",
-  "common.password": "Password",
-  "common.signUp": "Sign up",
+  "common.login": "Iniciar sesión",
+  "common.email": "Correo",
+  "common.password": "Contraseña",
+  "common.signUp": "Registrarme",
   "validationEmail": "El email no es correcto."
 }

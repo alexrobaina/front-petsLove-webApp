@@ -9,7 +9,7 @@
   --white: #fff;
   --bright-pink: #ed6193;
   --light-blue: #5e92f3;
-  --grey-light: #d7d7d7;
+  --grey-light: #e9e9e9;
   --pale-navy: #dee0f8;
   --strong-red: #ce0000;
   --bright-orange: #fdd835;
@@ -43,6 +43,9 @@
   --loading-ring: var(--pale-navy);
 
   --label-text-color: var(--deep-navy);
+
+  --background-menu: var(--grey-light);
+  --background-menu-hover: var(--bright-pink);
 }
 
 :root .light {
@@ -73,4 +76,7 @@
   --loading-ring: var(--pale-navy);
 
   --label-text-color: var(--deep-navy);
+
+  --background-menu: var(--grey-light);
+  --background-menu-hover: var(--bright-pink);
 }

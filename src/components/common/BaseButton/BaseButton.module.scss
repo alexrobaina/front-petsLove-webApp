@@ -11,6 +11,16 @@
   transition: 0.3s;
   font-family: var(--main-font);
   color: var(--button-text);
+
+  &.iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    flex-direction: row;
+  }
 }
 
 .buttonPrimary {
@@ -52,7 +62,6 @@
 .icon {
   display: flex;
   align-items: center;
-  margin-right: 8px;
 }
 
 .linkText {

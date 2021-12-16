@@ -80,13 +80,15 @@ const BaseButton: FC<Props> = ({
         small && styles.small,
         large && styles.large,
         medium && styles.medium,
+        icon && styles.iconContainer,
         success && styles.buttonStateSuccess,
         disabled && styles.buttonStateDisabled,
       )}
       style={{ marginTop, marginBottom }}
       type={type === 'submit' ? 'submit' : 'button'}
     >
-      <div className={styles.text}>{text}</div>
+      {icon && <div className={styles.icon}>{icon}</div>}
+      {text && <div className={styles.text}>{text}</div>}
     </button>
   );
 };

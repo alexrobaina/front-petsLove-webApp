@@ -63,20 +63,20 @@ const LoginForm: FC<Props> = ({
             marginTop={10}
             testId={testId}
             inputName="password"
-            placeholder="Pasword"
             value={values.password}
             handleChange={handleChange}
             label={t('common.password')}
+            placeholder={t('common.password')}
             errorMessage={t(errors.password || '')}
           />
-          <BaseButton large type="submit" text="Login" marginTop={30} />
+          <BaseButton large type="submit" text={t('common.login')} marginTop={30} />
           <div className={styles.containerActions}>
             <BaseButton
               small
               isButtonLink
               fontSize={18}
-              text="Registrarme"
               onClick={goToRegister}
+              text={t('common.signUp')}
             />
             <BaseButton
               small
