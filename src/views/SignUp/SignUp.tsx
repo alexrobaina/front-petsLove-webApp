@@ -21,7 +21,6 @@ const SignUp: FC = () => {
     initialValues: { email: '', password: '' },
     validationSchema: validationLogin,
     onSubmit: (values: { email: string; password: string }) => {
-      console.log(values);
       const data = { email: values.email, password: values.password };
       dispatch(login(data));
     },
