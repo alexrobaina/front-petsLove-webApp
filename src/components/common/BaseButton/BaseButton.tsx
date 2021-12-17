@@ -7,7 +7,6 @@ interface Props {
   type?: string;
   testId?: string;
   small?: boolean;
-  linkURL?: string;
   large?: boolean;
   medium?: boolean;
   fontSize?: number;
@@ -29,7 +28,6 @@ const BaseButton: FC<Props> = ({
   type = '',
   testId = '',
   icon = null,
-  linkURL = '',
   fontSize = 16,
   small = false,
   large = false,
@@ -52,11 +50,9 @@ const BaseButton: FC<Props> = ({
 
   if (isButtonLink) {
     return (
-      <a
-        href={linkURL}
+      <div
+        onClick={click}
         data-testid={`button-link-${testId}`}
-        target="_blank"
-        rel="noreferrer"
         className={c(
           styles.isButtonLink,
           small && styles.small,
@@ -68,7 +64,7 @@ const BaseButton: FC<Props> = ({
       >
         <div className={styles.icon}>{icon}</div>
         <div className={styles.linkText}>{text}</div>
-      </a>
+      </div>
     );
   }
 
@@ -84,13 +80,15 @@ const BaseButton: FC<Props> = ({
         small && styles.small,
         large && styles.large,
         medium && styles.medium,
+        icon && styles.iconContainer,
         success && styles.buttonStateSuccess,
         disabled && styles.buttonStateDisabled,
       )}
       style={{ marginTop, marginBottom }}
       type={type === 'submit' ? 'submit' : 'button'}
     >
-      <div className={styles.text}>{text}</div>
+      {icon && <div className={styles.icon}>{icon}</div>}
+      {text && <div className={styles.text}>{text}</div>}
     </button>
   );
 };

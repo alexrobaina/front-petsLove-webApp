@@ -14,22 +14,22 @@
 
   &.bold {
     font-family: var(--main-font);
-    font-weight: 600 !important;
+    font-weight: 400;
   }
 
   &.medium {
     font-family: var(--main-font);
-    font-weight: 500 !important;
+    font-weight: 500;
   }
 
   &.regular {
     font-family: var(--main-font);
-    font-weight: 400 !important;
+    font-weight: 400;
   }
 
   &.thin {
     font-family: var(--main-font);
-    font-weight: 300 !important;
+    font-weight: 300;
   }
 
   @include media-breakpoint-between(xs, sm) {

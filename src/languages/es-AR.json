@@ -1,0 +1,10 @@
+{
+  "common.loading": "Cargando",
+  "common.validationRequired": "Este campo es requerido.",
+  "common.forgotPassword": "Olvidé mi contraseña.",
+  "common.login": "Iniciar sesión",
+  "common.email": "Correo",
+  "common.password": "Contraseña",
+  "common.signUp": "Registrarme",
+  "validationEmail": "El email no es correcto."
+}

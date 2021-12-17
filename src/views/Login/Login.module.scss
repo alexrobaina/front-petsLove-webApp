@@ -1,0 +1,25 @@
+@import '../../styles/mixings.scss';
+
+.containerImage {
+  @include media-breakpoint-between(xs, md) {
+    display: none;
+  }
+}
+
+.containerAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: '100vh';
+  margin: 0;
+}
+
+.containerAccount {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.containerForm {
+  display: flex;
+}

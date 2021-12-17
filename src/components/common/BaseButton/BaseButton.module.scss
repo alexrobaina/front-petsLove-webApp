@@ -10,6 +10,17 @@
   cursor: pointer;
   transition: 0.3s;
   font-family: var(--main-font);
+  color: var(--button-text);
+
+  &.iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    flex-direction: row;
+  }
 }
 
 .buttonPrimary {
@@ -18,6 +29,10 @@
   width: 312px;
   height: 48px;
   transition: 0.3s;
+
+  &:hover {
+    background-color: var(--button-hover-background);
+  }
 }
 
 .isButtonLink {
@@ -38,10 +53,15 @@
   }
 }
 
+.small {
+  @include media-breakpoint-between(xs, md) {
+    font-size: 14px !important;
+  }
+}
+
 .icon {
   display: flex;
   align-items: center;
-  margin-right: 8px;
 }
 
 .linkText {
@@ -57,12 +77,6 @@
   color: var(--button-text);
   background-color: var(--button-background-disabled-text);
   opacity: 0.5;
-}
-
-.small {
-  width: 100px;
-  display: flex;
-  justify-content: center;
 }
 
 .medium {

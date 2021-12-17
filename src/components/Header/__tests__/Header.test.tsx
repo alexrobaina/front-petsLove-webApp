@@ -5,8 +5,9 @@ import Header from '../Header';
 describe('<Header />', () => {
   test.skip('Should component must render correctly', () => {
     const changeTheme = () => {};
+    const setLanguage = () => {};
     const { getByTestId }: any = render(
-      <Header changeTheme={changeTheme} theme="light" />,
+      <Header setLanguage={setLanguage} changeTheme={changeTheme} theme="light" />,
       {},
     );
 

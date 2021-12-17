@@ -21,13 +21,9 @@ describe('<BaseButton />', () => {
   });
 
   test('Should button link', () => {
+    const goToAnyPage = () => {};
     const { getByTestId }: any = render(
-      <BaseButton
-        testId="test"
-        isButtonLink
-        text="Login"
-        linkURL="https://testing-library.com/docs/react-testing-library/setup"
-      />,
+      <BaseButton onClick={goToAnyPage} testId="test" isButtonLink text="Login" />,
       {},
     );
 

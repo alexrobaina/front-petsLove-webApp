@@ -6,7 +6,7 @@ interface Props {
   src?: string;
   left?: boolean;
   testId?: string;
-  width?: number;
+  width?: string;
   right?: boolean;
   marginTop?: number;
   marginLeft?: number;

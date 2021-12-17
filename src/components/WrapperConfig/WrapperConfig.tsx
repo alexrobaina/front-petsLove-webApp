@@ -1,14 +1,24 @@
-import { ReactElement, FC, useState, useCallback, useEffect } from "react";
-import Header from "../Header";
-import { DARK, LIGHT } from "../Header/contants";
-import "./theme.scss";
+import { ReactElement, FC, useState, useCallback, useEffect } from 'react';
+import { IntlProvider } from 'react-intl';
+import Header from '../Header';
+import spanishAR from '../../languages/es-AR.json';
+import englishUS from '../../languages/en-US.json';
+import { DARK, LIGHT } from '../Header/contants';
+import './theme.scss';
 
 interface Props {
   children: ReactElement;
 }
 
 const WrapperConfig: FC<Props> = ({ children }) => {
+  const local = navigator.language;
   const [theme, setTheme] = useState(LIGHT);
+  const [langSelected, setLangSelected] = useState(englishUS);
+
+  const setLanguage = (lang: string) => {
+    if (lang === 'en-US') return setLangSelected(englishUS);
+    return setLangSelected(spanishAR);
+  };
 
   const changeThemne = useCallback((selectedTheme: string) => {
     setTheme(selectedTheme);
@@ -27,10 +37,12 @@ const WrapperConfig: FC<Props> = ({ children }) => {
   }, [changeThemne]);
 
   return (
-    <div data-testid="wrapperConfig-app">
-      <Header changeTheme={changeThemne} theme={theme} />
-      {children}
-    </div>
+    <IntlProvider locale={local} messages={langSelected}>
+      <div data-testid="wrapperConfig-app">
+        <Header setLanguage={setLanguage} changeTheme={changeThemne} theme={theme} />
+        {children}
+      </div>
+    </IntlProvider>
   );
 };
 

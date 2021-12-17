@@ -4,6 +4,10 @@ import { Provider } from 'react-redux';
 import navigation from './navigation/navigation';
 import WrapperConfig from './components/WrapperConfig';
 import store from './store';
+import Login from './views/Login';
+import UserProfile from './views/UserProfile';
+import PrivateRoute from './navigation/PrivateRoute';
+import { LOGIN, USER_PROFILE } from './navigation/routes/routes';
 import './App.scss';
 
 function App() {
@@ -13,9 +17,16 @@ function App() {
         <Switch>
           <WrapperConfig>
             <>
+              <Route exact path={LOGIN} component={Login} />
               {navigation.map((nav: { path: string; component: ComponentType }) => {
                 return <Route key={nav.path} path={nav.path} component={nav.component} />;
               })}
+              <PrivateRoute
+                exact
+                path={USER_PROFILE}
+                redirectPath={LOGIN}
+                component={UserProfile}
+              />
             </>
           </WrapperConfig>
         </Switch>

@@ -1,81 +1,82 @@
 @import '../../styles/mixings.scss';
 
 :root {
-  --dark: #000;
-  --ligth: #fff;
-  --sea-pink: #ef9a9a;
-  --red-error: #bb002f;
-  --sail: #a6d0f3;
-  --grey: #88a9b9;
-  --hawkes-blue: #e3f2fd;
-  --black-russian: #0e0033;
-  --periwinkle-grey: #dee3f2;
-  --anakiwa: #9dcde4;
-  --hawkes-blue: #e3f2fd;
-  --outer-space: #303538;
-  --denimapprox: #1565c0;
+  --text-font: 'Lato', sans-serif;
+  --title-font: 'Noto Sans KR', sans-serif;
+  --main-font: var(--text-font);
+
+  --deep-navy: #001b61;
+  --white: #fff;
+  --bright-pink: #ed6193;
+  --light-blue: #5e92f3;
+  --grey-light: #e9e9e9;
+  --pale-navy: #dee0f8;
+  --strong-red: #ce0000;
+  --bright-orange: #fdd835;
 }
 
 :root .dark {
   transition-duration: 0.3s;
   transition-timing-function: linear;
 
-  //fonts
-  --main-font: 'Poppins', sans-serif;
-
+  --header-background: var(--pale-navy);
   --main-background: var(--dark);
 
-  --base-text-color: var(--ligth);
+  --base-text-color: var(--deep-navy);
 
-  --button-background: var(--anakiwa);
+  --button-background: var(--pale-navy);
   --button-text: var(--dark);
-  --button-background-disabled-text: var(--periwinkle-grey);
+  --button-background-disabled-text: var(--grey-light);
+  --button-hover-background: var(--light-blue);
+  --button-hover-text: var(--pale-navy);
 
-  --input-border-color: var(--anakiwa);
-  --input-focus: var(--denimapprox);
-  --input-hover: var(--denimapprox);
-  --input-error: var(--sea-pink);
+  --input-border-color: var(--light-blue);
+  --input-focus: var(--bright-pink);
+  --input-hover: var(--bright-pink);
+  --input-error: var(--strong-red);
   --input-icon-eye-password: var(--anakiwa);
-  --input-placeholder: #3a525e;
+  --input-placeholder: var(--grey-light);
 
-  --error-background-color: var(--red-error);
-  --error-message-color: var(--ligth);
+  --error-background-color: var(--strong-red);
+  --error-message-color: var(--white);
 
-  --border-card-color: var(--outer-space);
+  --loading-ring: var(--pale-navy);
 
-  --loading-ring: var(--anakiwa);
+  --label-text-color: var(--deep-navy);
 
-  --label-text-color: var(--ligth);
+  --background-menu: var(--grey-light);
+  --background-menu-hover: var(--bright-pink);
 }
 
 :root .light {
   transition-duration: 0.3s;
   transition-timing-function: linear;
 
-  //fonts
-  --main-font: 'Poppins', sans-serif;
+  --header-background: var(--pale-navy);
+  --main-background: var(--dark);
 
-  --main-background: var(--ligth);
+  --base-text-color: var(--deep-navy);
 
-  --base-text-color: var(--dark);
-
-  --button-background: var(--anakiwa);
+  --button-background: var(--pale-navy);
   --button-text: var(--dark);
-  --button-background-disabled-text: var(--periwinkle-grey);
+  --button-background-disabled-text: var(--grey-light);
+  --button-hover-background: var(--light-blue);
+  --button-hover-text: var(--pale-navy);
 
-  --input-border-color: var(--anakiwa);
-  --input-focus: var(--denimapprox);
-  --input-hover: var(--denimapprox);
-  --input-error: var(--sea-pink);
+  --input-border-color: var(--light-blue);
+  --input-focus: var(--bright-pink);
+  --input-hover: var(--bright-pink);
+  --input-error: var(--strong-red);
   --input-icon-eye-password: var(--anakiwa);
-  --input-placeholder: var(--sail);
+  --input-placeholder: var(--grey-light);
 
-  --error-background-color: var(--red-error);
-  --error-message-color: var(--ligth);
+  --error-background-color: var(--strong-red);
+  --error-message-color: var(--white);
 
-  --border-card-color: var(--hawkes-blue);
+  --loading-ring: var(--pale-navy);
 
-  --loading-ring: var(--anakiwa);
+  --label-text-color: var(--deep-navy);
 
-  --label-text-color: var(--dark);
+  --background-menu: var(--grey-light);
+  --background-menu-hover: var(--bright-pink);
 }
