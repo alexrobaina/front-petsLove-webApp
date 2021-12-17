@@ -5,6 +5,8 @@
   "common.login": "Iniciar sesión",
   "common.email": "Correo",
   "common.password": "Contraseña",
+  "common.validationEmail": "El email no es correcto.",
   "common.signUp": "Registrarme",
-  "validationEmail": "El email no es correcto."
+  "login.documentNotFound": "Este usuario no existe.",
+  "login.credentialsError": "Crenciales invalidas."
 }

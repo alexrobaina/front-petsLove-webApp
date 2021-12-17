@@ -1,8 +1,9 @@
 import { FC, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
 import { FormikErrors } from 'formik';
+import { useSelector } from 'react-redux';
 import BaseInput from '../../../../components/common/BaseInput';
-// import BaseNotifyMessage from '../../../../components/common/BaseNotifyMessage';
+import BaseNotifyMessage from '../../../../components/common/BaseNotifyMessage';
 import BaseButton from '../../../../components/common/BaseButton';
 import BaseTitle from '../../../../components/common/BaseTitle';
 import { VARIANTS_OPACITY } from '../../../../constants/animation';
@@ -29,6 +30,15 @@ const LoginForm: FC<Props> = ({
   goToForgotPassword,
 }) => {
   const { t } = useTranslate();
+  const { data } = useSelector((state: any) => state.login);
+
+  const setErrorMessageComponent = (errorCode: number) => {
+    if (errorCode === 2)
+      return <BaseNotifyMessage canClose message={t('login.documentNotFound')} />;
+    if (errorCode === 1)
+      return <BaseNotifyMessage canClose message={t('login.credentialsError')} />;
+    return null;
+  };
 
   return (
     <div data-testid={`form-container-${testId}`} className={styles.container}>
@@ -47,6 +57,7 @@ const LoginForm: FC<Props> = ({
             marginBottom={60}
             text={t('common.login')}
           />
+          {setErrorMessageComponent(data.code)}
           <BaseInput
             type="text"
             marginTop={10}

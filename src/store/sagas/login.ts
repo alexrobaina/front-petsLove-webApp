@@ -23,8 +23,9 @@ export function* loginWorker(data: { payload: { email: string; password: string 
     );
 
     yield put(loginSuccess(response));
-  } catch (err) {
-    yield put(loginFailure({}));
+  } catch ({ response }) {
+    // @ts-ignore
+    yield put(loginFailure(response.data || {}));
   }
 }
 
