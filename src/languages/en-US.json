@@ -5,6 +5,8 @@
   "common.login": "Login",
   "common.email": "Email",
   "common.password": "Password",
+  "common.validationEmail": "The email format is incorrect.",
   "common.signUp": "Sign up",
-  "validationEmail": "The email format is incorrect."
+  "login.documentNotFound": "This user don't exist.",
+  "login.credentialsError": "Invalid credentials."
 }

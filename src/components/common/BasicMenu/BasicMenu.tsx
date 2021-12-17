@@ -26,7 +26,7 @@ const BasicMenu: FC<Props> = ({ items, handleSelectItem }) => {
       <div className={styles.iconButton} onClick={handleToggle}>
         <FaLanguage size={30} />
       </div>
-      <Menu open={isOpen}>
+      <Menu open={!isOpen}>
         <>
           {items.map((item: { text: string; value: string }) => (
             <div key={item.value} onClick={() => handleToggleSelected(item.value)}>

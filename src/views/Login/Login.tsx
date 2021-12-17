@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-// import Layout from '../../components/common/Layout';
 import LoginForm from './components/LoginForm';
 import { login } from '../../store/slices/login';
 import { validationLogin } from './helpers/validationInputSchema';
