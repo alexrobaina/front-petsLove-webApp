@@ -1,33 +1,30 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
 
-const sliceName = 'login';
+const sliceName = 'signUp';
 
 export const initialState = {
   data: {},
-  token: '',
   isLoading: false,
   error: false,
   success: false,
 };
 
-const loginSlice = createSlice({
+const signUpSlice = createSlice({
   name: sliceName,
   initialState,
   reducers: {
-    loginStart(state) {
+    signUpStart(state) {
       state.data = {};
       state.error = false;
       state.isLoading = true;
     },
-    loginSuccess(state, { payload }) {
+    signUpSuccess(state, { payload }) {
       state.error = false;
       state.data = payload;
       state.success = true;
       state.isLoading = false;
-      state.token = payload.data.token;
-      localStorage.setItem('token', payload.data.token);
     },
-    loginFailure(state, action) {
+    signUpFailure(state, action) {
       state.error = true;
       state.success = false;
       state.isLoading = false;
@@ -42,13 +39,17 @@ const loginSlice = createSlice({
   },
 });
 
-const { actions, reducer } = loginSlice;
+const { actions, reducer } = signUpSlice;
 
-export const { loginStart, loginSuccess, loginFailure, cleanErrors } = actions;
+export const { signUpStart, signUpSuccess, signUpFailure, cleanErrors } = actions;
 
-export const login = createAction<{ email: string; password: string }>(
-  `${sliceName}/login`,
-);
+export const signUp = createAction<{
+  role: string;
+  email: string;
+  name?: string;
+  phone?: string;
+  password: string;
+}>(`${sliceName}/signUp`);
 
 export const cleanErrorsAction = createAction(`${sliceName}/cleanError`);
 

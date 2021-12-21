@@ -75,7 +75,7 @@ const BaseInput: FC<Props> = ({
       data-testid={`baseInput-${testId}-${inputName}-container`}
       style={{ marginTop, marginBottom }}
     >
-      {label && <BaseLabel text={label} />}
+      {label && <BaseLabel bold text={label} />}
       <input
         title={title}
         ref={inputRef}

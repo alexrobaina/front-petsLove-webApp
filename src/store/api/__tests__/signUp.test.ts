@@ -16,7 +16,7 @@ describe('Login', () => {
       );
     // const resultApi = await login('asf');
 
-    expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/users/register`, {
+    expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/user/`, {
       account: 'alex@test.com',
     });
 

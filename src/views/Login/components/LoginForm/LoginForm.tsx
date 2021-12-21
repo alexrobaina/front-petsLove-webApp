@@ -1,4 +1,5 @@
 import { FC, ChangeEvent } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { motion } from 'framer-motion';
 import { FormikErrors } from 'formik';
 import { useSelector } from 'react-redux';
@@ -8,25 +9,30 @@ import BaseButton from '../../../../components/common/BaseButton';
 import BaseTitle from '../../../../components/common/BaseTitle';
 import { VARIANTS_OPACITY } from '../../../../constants/animation';
 import { useTranslate } from '../../../../hooks/useTranslate';
+import BaseErrorMessage from '../../../../components/common/BaseErrorMessage';
 import styles from './LoginForm.module.scss';
 
 interface Props {
   testId: string;
   submitForm: any;
+  captchaRef: any;
+  errorCaptcha: string;
   goToRegister: () => void;
   goToForgotPassword: () => void;
   values: { email: string; password: string };
-  errors: FormikErrors<{ email: string; password: string }>;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  errors: FormikErrors<{ email: string; password: string }>;
 }
 
 const LoginForm: FC<Props> = ({
   testId,
   values,
   errors,
+  captchaRef,
   submitForm,
   handleChange,
   goToRegister,
+  errorCaptcha,
   goToForgotPassword,
 }) => {
   const { t } = useTranslate();
@@ -57,7 +63,7 @@ const LoginForm: FC<Props> = ({
             marginBottom={60}
             text={t('common.login')}
           />
-          {setErrorMessageComponent(data.code)}
+          {data?.code && setErrorMessageComponent(data?.code)}
           <BaseInput
             type="text"
             marginTop={10}
@@ -67,19 +73,26 @@ const LoginForm: FC<Props> = ({
             label={t('common.email')}
             handleChange={handleChange}
             placeholder="alexgomez@gmail.com"
-            errorMessage={t(errors.email || '')}
+            errorMessage={t(errors.email)}
           />
           <BaseInput
             type="text"
             marginTop={10}
             testId={testId}
+            marginBottom={30}
             inputName="password"
             value={values.password}
             handleChange={handleChange}
             label={t('common.password')}
             placeholder={t('common.password')}
-            errorMessage={t(errors.password || '')}
+            errorMessage={t(errors.password)}
           />
+          <ReCAPTCHA
+            size="normal"
+            ref={captchaRef}
+            sitekey="6LeMTrsdAAAAAP1SekJgyrAFNlvX94RJyok1oA5C"
+          />
+          {errorCaptcha && <BaseErrorMessage text={t(errorCaptcha)} />}
           <BaseButton large type="submit" text={t('common.login')} marginTop={30} />
           <div className={styles.containerActions}>
             <BaseButton

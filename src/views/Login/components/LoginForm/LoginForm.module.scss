@@ -19,7 +19,4 @@
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-
-  @include media-breakpoint-between(xs, md) {
-  }
 }

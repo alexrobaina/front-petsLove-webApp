@@ -1,18 +1,20 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import LoginForm from './components/LoginForm';
-import { login } from '../../store/slices/login';
+import { cleanErrorsAction, login } from '../../store/slices/login';
 import { validationLogin } from './helpers/validationInputSchema';
 import { FORGOT_PASSWORD, SIGN_UP, USER_PROFILE } from '../../navigation/routes/routes';
 import BaseImage from '../../components/common/BaseImage';
 import styles from './Login.module.scss';
 
 const Login: FC = () => {
+  const captchaRef: any = useRef(null);
+  const [errorCaptcha, setErrorCaptcha] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
-  const { token } = useSelector((state: any) => state.login);
+  const { token, error } = useSelector((state: any) => state.login);
 
   if (token !== '') {
     history.push(USER_PROFILE);
@@ -31,9 +33,18 @@ const Login: FC = () => {
     validationSchema: validationLogin,
     onSubmit: (values: { email: string; password: string }) => {
       const data = { email: values.email, password: values.password };
-      dispatch(login(data));
+
+      if (!captchaRef.current.getValue()) setErrorCaptcha('common.errorCaptcha');
+      if (captchaRef.current.getValue()) {
+        dispatch(login(data));
+        setErrorCaptcha('');
+      }
     },
   });
+
+  useEffect(() => {
+    if (error) dispatch(cleanErrorsAction());
+  }, [dispatch]);
 
   const { values, handleChange, handleSubmit, errors } = formik;
 
@@ -49,7 +60,9 @@ const Login: FC = () => {
         testId="login"
         values={values}
         errors={errors}
+        captchaRef={captchaRef}
         submitForm={handleSubmit}
+        errorCaptcha={errorCaptcha}
         handleChange={handleChange}
         goToRegister={goToRegister}
         goToForgotPassword={goToForgotPassword}

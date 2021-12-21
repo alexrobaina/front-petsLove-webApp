@@ -4,7 +4,8 @@ import Header from '../Header';
 import spanishAR from '../../languages/es-AR.json';
 import englishUS from '../../languages/en-US.json';
 import { DARK, LIGHT } from '../Header/contants';
-import './theme.scss';
+import '../../styles/themeLight.scss';
+import '../../styles/themeDark.scss';
 
 interface Props {
   children: ReactElement;

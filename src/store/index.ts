@@ -15,7 +15,7 @@ const store = configureStore({
     getDefaultMiddleware({ thunk: false, serializableCheck: false }).concat(
       sagaMiddleware,
     ),
-  devTools: false,
+  devTools: true,
 });
 
 sagaMiddleware.run(rootSaga);

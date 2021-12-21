@@ -55,7 +55,7 @@
 
 .small {
   @include media-breakpoint-between(xs, md) {
-    font-size: 14px !important;
+    font-size: 14px;
   }
 }
 

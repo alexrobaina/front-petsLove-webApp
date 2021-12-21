@@ -25,7 +25,7 @@ const BaseText: FC<Props> = ({
   marginTop,
   marginLeft,
   marginRight,
-  thin = true,
+  thin = false,
   marginBottom,
   color = '',
   bold = false,

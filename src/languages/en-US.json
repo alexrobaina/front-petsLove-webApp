@@ -4,9 +4,19 @@
   "common.forgotPassword": "Forgot password.",
   "common.login": "Login",
   "common.email": "Email",
+  "common.goToLogin": "Go to login",
+  "common.name": "Name",
   "common.password": "Password",
   "common.validationEmail": "The email format is incorrect.",
   "common.signUp": "Sign up",
+  "common.phone": "Phone",
+  "common.somethingIsWrong": "Something is wrong, try again.",
+  "common.userExist": "This user exist.",
+  "common.errorCaptcha": "Please verify your are not a robot.",
   "login.documentNotFound": "This user don't exist.",
-  "login.credentialsError": "Invalid credentials."
+  "login.credentialsError": "Invalid credentials.",
+  "signUp.wantToAdopt": "I want to adopt",
+  "signUp.iAmShelter": "I am Shelter",
+  "signUp.iAmVet": "I am Vet",
+  "signUp.organizationName": "Name of the Shelter or Veterinarian."
 }
