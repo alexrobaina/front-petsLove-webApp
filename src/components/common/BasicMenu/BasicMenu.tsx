@@ -24,7 +24,7 @@ const BasicMenu: FC<Props> = ({ items, handleSelectItem }) => {
   return (
     <div className={styles.containerBasicMenu}>
       <div className={styles.iconButton} onClick={handleToggle}>
-        <FaLanguage size={30} />
+        <FaLanguage size={40} />
       </div>
       <Menu open={!isOpen}>
         <>

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import BaseTitle from '../common/BaseTitle';
 import BasicMenu from '../common/BasicMenu';
-import ThemeChange from './components/ThemeChange';
+// import ThemeChange from './components/ThemeChange';
 import styles from './Header.module.scss';
 
 interface Props {
@@ -15,12 +15,16 @@ const ITEMS = [
   { text: 'EN', value: 'en-US' },
 ];
 
-const Header: FC<Props> = ({ changeTheme, theme, setLanguage }) => {
+const Header: FC<Props> = ({
+  // changeTheme,
+  // theme,
+  setLanguage,
+}) => {
   return (
     <div data-testid="header-app" className={styles.header}>
       <BaseTitle fontSize={20} text="Pets Love" />
       <div className={styles.containerNavegation}>
-        <ThemeChange changeTheme={changeTheme} theme={theme} />
+        {/* <ThemeChange changeTheme={changeTheme} theme={theme} /> */}
         <BasicMenu handleSelectItem={setLanguage} items={ITEMS} />
       </div>
     </div>

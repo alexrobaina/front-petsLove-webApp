@@ -3,11 +3,12 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 
 // Actions
 import {
-  cleanErrors,
+  login,
   loginStart,
+  cleanErrors,
   loginSuccess,
   loginFailure,
-  login,
+  cleanErrorsAction,
 } from '../slices/login';
 
 // Api
@@ -25,7 +26,7 @@ export function* loginWorker(data: { payload: { email: string; password: string 
     yield put(loginSuccess(response));
   } catch ({ response }) {
     // @ts-ignore
-    yield put(loginFailure(response.data || {}));
+    yield put(loginFailure(response?.data || {}));
   }
 }
 
@@ -33,6 +34,7 @@ export function* resetErrorsWorker() {
   yield put(cleanErrors());
 }
 
-export default function* signUpSagasRoot() {
+export default function* loginSagasRoot() {
   yield takeLatest(login, loginWorker);
+  yield takeLatest(cleanErrorsAction, resetErrorsWorker);
 }

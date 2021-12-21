@@ -3,10 +3,20 @@
   "common.validationRequired": "Este campo es requerido.",
   "common.forgotPassword": "Olvidé mi contraseña.",
   "common.login": "Iniciar sesión",
+  "common.goToLogin": "Ir al Login",
   "common.email": "Correo",
+  "common.phone": "Teléfono",
+  "common.name": "Nombre",
   "common.password": "Contraseña",
   "common.validationEmail": "El email no es correcto.",
   "common.signUp": "Registrarme",
+  "common.somethingIsWrong": "Algo salio mal, intente de nuevo.",
+  "common.userExist": "El usuario ya existe.",
+  "common.errorCaptcha": "Por seguridad verifica que no eres un robot.",
   "login.documentNotFound": "Este usuario no existe.",
-  "login.credentialsError": "Crenciales invalidas."
+  "login.credentialsError": "Crenciales invalidas.",
+  "signUp.wantToAdopt": "Quiero adoptar.",
+  "signUp.iAmShelter": "Soy un refugio.",
+  "signUp.iAmVet": "Soy veterinario.",
+  "signUp.organizationName": "Nombre de la Regufio o veterinaria."
 }
