@@ -16,6 +16,7 @@
   "common.errorCaptcha": "Por seguridad verifica que no eres un robot.",
   "login.documentNotFound": "Este usuario no existe.",
   "login.credentialsError": "Crenciales invalidas.",
+  "signUp.userCreatedSuccessful": "Bienvenido a Pets love. Tu usuario fue registrado exitosamente.",
   "signUp.wantToAdopt": "Quiero adoptar.",
   "signUp.iAmShelter": "Soy un refugio.",
   "signUp.iAmVet": "Soy veterinario.",

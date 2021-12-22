@@ -16,6 +16,7 @@
   "common.continue": "Continue",
   "login.documentNotFound": "This user don't exist.",
   "login.credentialsError": "Invalid credentials.",
+  "signUp.userCreatedSuccessful": "Welcome to pets love. Your user has created successful.",
   "signUp.wantToAdopt": "I want to adopt",
   "signUp.iAmShelter": "I am Shelter",
   "signUp.iAmVet": "I am Vet",

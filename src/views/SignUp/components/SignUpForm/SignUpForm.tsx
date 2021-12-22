@@ -3,6 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { motion } from 'framer-motion';
 import { FormikErrors } from 'formik';
 import { useSelector } from 'react-redux';
+import shelterImage from '../../../../assets/images/shelter.png';
 import BaseInput from '../../../../components/common/BaseInput';
 import BaseNotifyMessage from '../../../../components/common/BaseNotifyMessage';
 import BaseButton from '../../../../components/common/BaseButton';
@@ -19,6 +20,12 @@ import { useTranslate } from '../../../../hooks/useTranslate';
 import { TSignUpForm } from '../../types';
 import BaseErrorMessage from '../../../../components/common/BaseErrorMessage';
 import styles from './SignUpForm.module.scss';
+import {
+  SOMETHING_IS_WRONG_ERROR_CODE,
+  USER_CREATED_CODE,
+  USER_EXIST_ERROR_CODE,
+} from '../../../../constants/responseCodes';
+import BaseResponseMessage from '../../../../components/common/BaseResponseMessage';
 
 interface Props {
   testId: string;
@@ -50,12 +57,24 @@ const SignUpForm: FC<Props> = ({
   };
 
   const setErrorMessageComponent = (errorCode: number) => {
-    if (errorCode === 3)
+    if (errorCode === USER_EXIST_ERROR_CODE)
       return <BaseNotifyMessage canClose message={t('common.userExist')} />;
-    if (errorCode === 4)
+    if (errorCode === SOMETHING_IS_WRONG_ERROR_CODE)
       return <BaseNotifyMessage canClose message={t('common.somethingIsWrong')} />;
     return null;
   };
+  console.log(data);
+
+  if (data?.code === USER_CREATED_CODE) {
+    return (
+      <BaseResponseMessage
+        goTo={goToLogin}
+        image={shelterImage}
+        buttonText={t('common.goToLogin')}
+        message={t('signUp.userCreatedSuccessful')}
+      />
+    );
+  }
 
   return (
     <div data-testid={`form-container-${testId}`} className={styles.container}>
