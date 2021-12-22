@@ -17,6 +17,7 @@
   "login.documentNotFound": "This user don't exist.",
   "login.credentialsError": "Invalid credentials.",
   "signUp.userCreatedSuccessful": "Welcome to pets love. Your user has created successful.",
+  "signUp.forgotPasswordEmailSend": "We send you an email with a link to change the password. If you did not get the email make sure it is not in the SPAM folder",
   "signUp.wantToAdopt": "I want to adopt",
   "signUp.iAmShelter": "I am Shelter",
   "signUp.iAmVet": "I am Vet",

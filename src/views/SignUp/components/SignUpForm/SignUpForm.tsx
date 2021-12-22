@@ -63,7 +63,6 @@ const SignUpForm: FC<Props> = ({
       return <BaseNotifyMessage canClose message={t('common.somethingIsWrong')} />;
     return null;
   };
-  console.log(data);
 
   if (data?.code === USER_CREATED_CODE) {
     return (
@@ -182,14 +181,16 @@ const SignUpForm: FC<Props> = ({
             onClick={goToLogin}
             text={t('common.goToLogin')}
           />
-          <div className={styles.containerCaptcha}>
-            <ReCAPTCHA
-              size="normal"
-              ref={captchaRef}
-              sitekey="6LeMTrsdAAAAAP1SekJgyrAFNlvX94RJyok1oA5C"
-            />
-            {errorCaptcha && <BaseErrorMessage text={t(errorCaptcha)} />}
-          </div>
+          {process.env.REACT_APP_GOOGLE_CAPTCHA && (
+            <div className={styles.containerCaptcha}>
+              <ReCAPTCHA
+                size="normal"
+                ref={captchaRef}
+                sitekey={process.env.REACT_APP_GOOGLE_CAPTCHA || ''}
+              />
+              {errorCaptcha && <BaseErrorMessage text={t(errorCaptcha)} />}
+            </div>
+          )}
         </motion.div>
       </form>
     </div>

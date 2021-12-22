@@ -17,6 +17,7 @@
   "login.documentNotFound": "Este usuario no existe.",
   "login.credentialsError": "Crenciales invalidas.",
   "signUp.userCreatedSuccessful": "Bienvenido a Pets love. Tu usuario fue registrado exitosamente.",
+  "signUp.forgotPasswordEmailSend": "Te enviamos un email con un link para cambiar la contraseña. Si no te llego el email asegurate que no este en la carpeta SPAM",
   "signUp.wantToAdopt": "Quiero adoptar.",
   "signUp.iAmShelter": "Soy un refugio.",
   "signUp.iAmVet": "Soy veterinario.",

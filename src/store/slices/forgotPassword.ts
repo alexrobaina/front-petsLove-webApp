@@ -20,9 +20,9 @@ const forgotPasswordSlice = createSlice({
     },
     forgotPasswordSuccess(state, { payload }) {
       state.error = false;
-      state.data = payload;
       state.success = true;
       state.isLoading = false;
+      state.data = payload.data;
     },
     forgotPasswordFailure(state, action) {
       state.error = true;

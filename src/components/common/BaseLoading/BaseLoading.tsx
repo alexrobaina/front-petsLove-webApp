@@ -7,6 +7,7 @@ import styles from './BaseLoading.module.scss';
 interface Props {
   testId: string;
   small?: boolean;
+  center?: boolean;
   isLoadingButton?: boolean;
   marginTop?: number | string;
 }

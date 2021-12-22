@@ -3,3 +3,4 @@ export const DOCUMENT_NOT_FOUND_ERROR_CODE = 2;
 export const USER_EXIST_ERROR_CODE = 3;
 export const SOMETHING_IS_WRONG_ERROR_CODE = 4;
 export const USER_CREATED_CODE = 5;
+export const EMAIL_SEND_SUCCESSFUL = 6;
