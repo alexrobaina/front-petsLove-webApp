@@ -17,8 +17,8 @@ import {
 } from '../../../../constants/roles';
 import { useTranslate } from '../../../../hooks/useTranslate';
 import { TSignUpForm } from '../../types';
-import styles from './SignUpForm.module.scss';
 import BaseErrorMessage from '../../../../components/common/BaseErrorMessage';
+import styles from './SignUpForm.module.scss';
 
 interface Props {
   testId: string;
@@ -123,7 +123,6 @@ const SignUpForm: FC<Props> = ({
               isChecked={values.role === USER_ADOPTER_ROLE}
             />
           </div>
-
           {setFieldsAdditional() && (
             <motion.div
               initial="hidden"
@@ -157,20 +156,22 @@ const SignUpForm: FC<Props> = ({
               />
             </motion.div>
           )}
-          <ReCAPTCHA
-            size="normal"
-            ref={captchaRef}
-            sitekey="6LeMTrsdAAAAAP1SekJgyrAFNlvX94RJyok1oA5C"
-          />
-          {errorCaptcha && <BaseErrorMessage text={t(errorCaptcha)} />}
           <BaseButton large type="submit" text={t('common.signUp')} marginTop={30} />
+          <BaseButton
+            isButtonLink
+            marginTop={20}
+            onClick={goToLogin}
+            text={t('common.goToLogin')}
+          />
+          <div className={styles.containerCaptcha}>
+            <ReCAPTCHA
+              size="normal"
+              ref={captchaRef}
+              sitekey="6LeMTrsdAAAAAP1SekJgyrAFNlvX94RJyok1oA5C"
+            />
+            {errorCaptcha && <BaseErrorMessage text={t(errorCaptcha)} />}
+          </div>
         </motion.div>
-        <BaseButton
-          isButtonLink
-          marginTop={20}
-          onClick={goToLogin}
-          text={t('common.goToLogin')}
-        />
       </form>
     </div>
   );

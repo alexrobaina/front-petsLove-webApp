@@ -8,6 +8,12 @@
   width: 100%;
 }
 
+.containerCaptcha {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+}
+
 .columns {
   display: flex;
   justify-content: center;

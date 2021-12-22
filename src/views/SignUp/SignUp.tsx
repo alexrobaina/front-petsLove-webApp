@@ -16,8 +16,8 @@ import {
 } from '../../constants/roles';
 import { signUp } from '../../store/slices/signUp';
 import { TSignUpForm } from './types';
-import styles from './SignUp.module.scss';
 import { signUpState } from './constants';
+import styles from './SignUp.module.scss';
 
 const SignUp: FC = () => {
   const [errorCaptcha, setErrorCaptcha] = useState('');

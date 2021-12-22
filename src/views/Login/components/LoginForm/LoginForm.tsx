@@ -87,12 +87,6 @@ const LoginForm: FC<Props> = ({
             placeholder={t('common.password')}
             errorMessage={t(errors.password)}
           />
-          <ReCAPTCHA
-            size="normal"
-            ref={captchaRef}
-            sitekey="6LeMTrsdAAAAAP1SekJgyrAFNlvX94RJyok1oA5C"
-          />
-          {errorCaptcha && <BaseErrorMessage text={t(errorCaptcha)} />}
           <BaseButton large type="submit" text={t('common.login')} marginTop={30} />
           <div className={styles.containerActions}>
             <BaseButton
@@ -110,6 +104,16 @@ const LoginForm: FC<Props> = ({
               text={t('common.forgotPassword')}
             />
           </div>
+          {process.env.REACT_APP_GOOGLE_CAPTCHA && (
+            <div className={styles.containerCaptcha}>
+              <ReCAPTCHA
+                size="normal"
+                ref={captchaRef}
+                sitekey={process.env.REACT_APP_GOOGLE_CAPTCHA || ''}
+              />
+              {errorCaptcha && <BaseErrorMessage text={t(errorCaptcha)} />}
+            </div>
+          )}
         </motion.div>
       </form>
     </div>

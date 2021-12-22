@@ -13,6 +13,7 @@
   "common.somethingIsWrong": "Something is wrong, try again.",
   "common.userExist": "This user exist.",
   "common.errorCaptcha": "Please verify your are not a robot.",
+  "common.continue": "Continue",
   "login.documentNotFound": "This user don't exist.",
   "login.credentialsError": "Invalid credentials.",
   "signUp.wantToAdopt": "I want to adopt",
