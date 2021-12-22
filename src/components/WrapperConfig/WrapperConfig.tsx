@@ -17,7 +17,11 @@ const WrapperConfig: FC<Props> = ({ children }) => {
   const [langSelected, setLangSelected] = useState(englishUS);
 
   const setLanguage = (lang: string) => {
-    if (lang === 'en-US') return setLangSelected(englishUS);
+    if (lang === 'en-US') {
+      localStorage.setItem('lang', 'en-US');
+      return setLangSelected(englishUS);
+    }
+    localStorage.setItem('lang', 'es-AR');
     return setLangSelected(spanishAR);
   };
 
@@ -36,6 +40,13 @@ const WrapperConfig: FC<Props> = ({ children }) => {
   useEffect(() => {
     changeThemne(LIGHT);
   }, [changeThemne]);
+
+  useEffect(() => {
+    const localstorageLanguage = localStorage.getItem('lang');
+    if (localstorageLanguage) {
+      setLanguage(localstorageLanguage);
+    }
+  }, [setLanguage]);
 
   return (
     <IntlProvider locale={local} messages={langSelected}>
