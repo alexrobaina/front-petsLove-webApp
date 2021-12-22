@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import Layout from '../../components/common/Layout';
 import ForgotPasswordForm from './components/ForgotPasswordForm';
-import { login } from '../../store/slices/login';
-import { validationLogin } from './helpers/validationInputSchema';
+import { forgotPassword } from '../../store/slices/forgotPassword';
+import { validationForgotPassword } from './helpers/validationInputSchema';
 import { LOGIN } from '../../navigation/routes/routes';
 
 const ForgotPassword: FC = () => {
@@ -17,22 +17,22 @@ const ForgotPassword: FC = () => {
   };
 
   const formik = useFormik({
-    initialValues: { email: '', password: '' },
-    validationSchema: validationLogin,
-    onSubmit: (values: { email: string; password: string }) => {
-      const data = { email: values.email, password: values.password };
-      dispatch(login(data));
+    initialValues: { email: '' },
+    validationSchema: validationForgotPassword,
+    onSubmit: (values: { email: string }) => {
+      const data = { email: values.email };
+      dispatch(forgotPassword(data));
     },
   });
   const { values, handleChange, handleSubmit, errors } = formik;
 
   return (
-    <Layout testID="home">
+    <Layout testID="forgotPassword">
       <ForgotPasswordForm
-        testId="login"
         values={values}
         errors={errors}
         goToLogin={goToLogin}
+        testId="forgotPassword"
         submitForm={handleSubmit}
         handleChange={handleChange}
       />

@@ -12,6 +12,7 @@
   "common.signUp": "Registrarme",
   "common.somethingIsWrong": "Algo salio mal, intente de nuevo.",
   "common.userExist": "El usuario ya existe.",
+  "common.continue": "Continuar",
   "common.errorCaptcha": "Por seguridad verifica que no eres un robot.",
   "login.documentNotFound": "Este usuario no existe.",
   "login.credentialsError": "Crenciales invalidas.",
