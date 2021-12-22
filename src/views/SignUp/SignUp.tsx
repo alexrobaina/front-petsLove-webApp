@@ -1,6 +1,9 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import {
+  useDispatch,
+  // useSelector
+} from 'react-redux';
 import { useFormik } from 'formik';
 import SignUpForm from './components/SignUpForm';
 import {
@@ -21,6 +24,7 @@ import styles from './SignUp.module.scss';
 
 const SignUp: FC = () => {
   const [errorCaptcha, setErrorCaptcha] = useState('');
+  // const { data as } = useSelector((state: any) => state.signUp);
   let captchaRef: any = useRef(null);
   const [schema, setSchema] = useState<any>(validationSignUpAdopter);
   const dispatch = useDispatch();

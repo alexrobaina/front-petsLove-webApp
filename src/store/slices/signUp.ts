@@ -20,7 +20,7 @@ const signUpSlice = createSlice({
     },
     signUpSuccess(state, { payload }) {
       state.error = false;
-      state.data = payload;
+      state.data = payload.data;
       state.success = true;
       state.isLoading = false;
     },
