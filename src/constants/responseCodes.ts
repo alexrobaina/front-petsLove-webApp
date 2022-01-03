@@ -4,3 +4,5 @@ export const USER_EXIST_ERROR_CODE = 3;
 export const SOMETHING_IS_WRONG_ERROR_CODE = 4;
 export const USER_CREATED_CODE = 5;
 export const EMAIL_SEND_SUCCESSFUL = 6;
+export const ERROR_RESET_PASSWORD = 7;
+export const RESET_PASWORD_SUCCESS = 8;

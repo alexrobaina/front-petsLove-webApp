@@ -5,9 +5,9 @@ import navigation from './navigation/navigation';
 import WrapperConfig from './components/WrapperConfig';
 import store from './store';
 import Login from './views/Login';
-import UserProfile from './views/UserProfile';
+import Dashboard from './views/Dashboard';
 import PrivateRoute from './navigation/PrivateRoute';
-import { LOGIN, USER_PROFILE } from './navigation/routes/routes';
+import { LOGIN, DASHBOARD } from './navigation/routes/routes';
 import './App.scss';
 
 function App() {
@@ -23,9 +23,9 @@ function App() {
               })}
               <PrivateRoute
                 exact
-                path={USER_PROFILE}
+                path={DASHBOARD}
                 redirectPath={LOGIN}
-                component={UserProfile}
+                component={Dashboard}
               />
             </>
           </WrapperConfig>

@@ -7,7 +7,9 @@ interface Props {
   left?: boolean;
   testId?: string;
   width?: string;
+  height?: string;
   right?: boolean;
+  objectFit?: any;
   marginTop?: number;
   marginLeft?: number;
   marginRight?: number;
@@ -17,6 +19,7 @@ interface Props {
 const BaseImage: FC<Props> = ({
   src,
   width,
+  height,
   testId,
   marginTop,
   marginLeft,
@@ -24,6 +27,7 @@ const BaseImage: FC<Props> = ({
   marginBottom,
   left = false,
   right = false,
+  objectFit = 'none',
 }) => {
   return (
     <div
@@ -31,7 +35,12 @@ const BaseImage: FC<Props> = ({
       style={{ marginTop, marginLeft, marginRight, marginBottom }}
       className={c(styles.container, left && styles.left, right && styles.right)}
     >
-      <img data-testid="image" style={{ width }} src={src} alt="baseImage" />
+      <img
+        src={src}
+        alt="baseImage"
+        data-testid="image"
+        style={{ width, height, objectFit }}
+      />
     </div>
   );
 };

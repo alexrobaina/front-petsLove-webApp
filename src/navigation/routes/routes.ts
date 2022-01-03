@@ -1,4 +1,5 @@
 export const LOGIN = '/';
 export const SIGN_UP = '/sign-up';
-export const USER_PROFILE = '/user-profile';
+export const DASHBOARD = '/dashboard';
 export const FORGOT_PASSWORD = '/forgot-password';
+export const RESET_PASSWORD = '/reset-password/:token';
