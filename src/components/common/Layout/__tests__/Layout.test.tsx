@@ -5,7 +5,7 @@ import Layout from '../Layout';
 describe('<Layout />', () => {
   test('Should render component corrently', () => {
     const { getByText }: any = render(
-      <Layout testID="layout">
+      <Layout testId="layout">
         <div>hola mundo</div>
       </Layout>,
       {},

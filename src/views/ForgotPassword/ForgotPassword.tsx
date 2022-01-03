@@ -38,7 +38,7 @@ const ForgotPassword: FC = () => {
   const { values, handleChange, handleSubmit, errors } = formik;
 
   return (
-    <Layout testID="forgotPassword">
+    <Layout testId="forgotPassword">
       <ForgotPasswordForm
         values={values}
         errors={errors}

@@ -50,7 +50,6 @@ const ForgotPasswordForm: FC<Props> = ({
       </div>
     );
   }
-  console.log(data?.code);
 
   if (data?.code === EMAIL_SEND_SUCCESSFUL) {
     return (

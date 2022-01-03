@@ -23,4 +23,18 @@
 .containerNavegation {
   display: flex;
   gap: 50px;
+
+  @include media-breakpoint-between(xs, sm) {
+    grid-gap: 0;
+  }
+}
+
+.iconButton {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--base-text-color);
+  cursor: pointer;
 }

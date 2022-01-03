@@ -1,34 +1,30 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
 
-const sliceName = 'login';
+const sliceName = 'resetPassword';
 
 export const initialState = {
   data: {},
-  token: '',
-  isLoading: false,
   error: false,
   success: false,
+  isLoading: false,
 };
 
-const loginSlice = createSlice({
+const resetPasswordSlice = createSlice({
   name: sliceName,
   initialState,
   reducers: {
-    loginStart(state) {
+    resetPasswordStart(state) {
       state.data = {};
       state.error = false;
       state.isLoading = true;
     },
-    loginSuccess(state, { payload }) {
+    resetPasswordSuccess(state, { payload }) {
       state.error = false;
-      state.data = payload;
       state.success = true;
       state.isLoading = false;
-      state.token = payload.data.token;
-      localStorage.setItem('token', payload.data.token);
-      localStorage.setItem('user', JSON.stringify(payload.data.user));
+      state.data = payload.data;
     },
-    loginFailure(state, action) {
+    resetPasswordFailure(state, action) {
       state.error = true;
       state.success = false;
       state.isLoading = false;
@@ -43,13 +39,19 @@ const loginSlice = createSlice({
   },
 });
 
-const { actions, reducer } = loginSlice;
+const { actions, reducer } = resetPasswordSlice;
 
-export const { loginStart, loginSuccess, loginFailure, cleanErrors } = actions;
+export const {
+  cleanErrors,
+  resetPasswordStart,
+  resetPasswordSuccess,
+  resetPasswordFailure,
+} = actions;
 
-export const login = createAction<{ email: string; password: string }>(
-  `${sliceName}/login`,
-);
+export const resetPassword = createAction<{
+  token: string;
+  password: string;
+}>(`${sliceName}/resetPassword`);
 
 export const cleanErrorsAction = createAction(`${sliceName}/cleanError`);
 

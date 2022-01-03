@@ -3,6 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { motion } from 'framer-motion';
 import { FormikErrors } from 'formik';
 import { useSelector } from 'react-redux';
+import shelterImage from '../../../../assets/images/shelter.png';
 import BaseInput from '../../../../components/common/BaseInput';
 import BaseNotifyMessage from '../../../../components/common/BaseNotifyMessage';
 import BaseButton from '../../../../components/common/BaseButton';
@@ -10,41 +11,58 @@ import BaseTitle from '../../../../components/common/BaseTitle';
 import { VARIANTS_OPACITY } from '../../../../constants/animation';
 import { useTranslate } from '../../../../hooks/useTranslate';
 import BaseErrorMessage from '../../../../components/common/BaseErrorMessage';
-import styles from './LoginForm.module.scss';
+import styles from './ResetPasswordForm.module.scss';
+import {
+  ERROR_RESET_PASSWORD,
+  RESET_PASWORD_SUCCESS,
+} from '../../../../constants/responseCodes';
+import BaseLoading from '../../../../components/common/BaseLoading';
+import BaseResponseMessage from '../../../../components/common/BaseResponseMessage';
 
 interface Props {
   testId: string;
   submitForm: any;
   captchaRef: any;
   errorCaptcha: string;
-  goToRegister: () => void;
-  goToForgotPassword: () => void;
-  values: { email: string; password: string };
+  goToLogin: () => void;
+  values: { password: string };
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errors: FormikErrors<{ email: string; password: string }>;
+  errors: FormikErrors<{ password: string }>;
 }
 
 const LoginForm: FC<Props> = ({
   testId,
   values,
   errors,
+  goToLogin,
   captchaRef,
   submitForm,
-  handleChange,
-  goToRegister,
   errorCaptcha,
-  goToForgotPassword,
+  handleChange,
 }) => {
   const { t } = useTranslate();
-  const { data } = useSelector((state: any) => state.login);
+  const { data, isloading } = useSelector((state: any) => state.resetPassword);
+
+  if (isloading) {
+    return <BaseLoading testId="resetPassword" />;
+  }
 
   const setErrorMessageComponent = (errorCode: number) => {
-    if (errorCode === 2)
-      return <BaseNotifyMessage canClose message={t('login.documentNotFound')} />;
-    if (errorCode === 1)
-      return <BaseNotifyMessage canClose message={t('login.credentialsError')} />;
-    return null;
+    if (errorCode === ERROR_RESET_PASSWORD)
+      return <BaseNotifyMessage canClose message={t('common.somethingIsWrong')} />;
+    return <BaseNotifyMessage canClose message={t('common.tokenExpired')} />;
   };
+
+  if (data?.code === RESET_PASWORD_SUCCESS) {
+    return (
+      <BaseResponseMessage
+        goTo={goToLogin}
+        image={shelterImage}
+        buttonText={t('common.goToLogin')}
+        message={t('resetPassword.resetPasswordSuccessful')}
+      />
+    );
+  }
 
   return (
     <div data-testid={`form-container-${testId}`} className={styles.container}>
@@ -61,20 +79,9 @@ const LoginForm: FC<Props> = ({
             fontSize={30}
             marginTop={40}
             marginBottom={60}
-            text={t('common.login')}
+            text={t('resetPassword.changePassword')}
           />
           {data?.code && setErrorMessageComponent(data?.code)}
-          <BaseInput
-            type="text"
-            marginTop={10}
-            testId={testId}
-            inputName="email"
-            value={values.email}
-            label={t('common.email')}
-            handleChange={handleChange}
-            placeholder="alexgomez@gmail.com"
-            errorMessage={t(errors.email)}
-          />
           <BaseInput
             marginTop={10}
             testId={testId}
@@ -83,25 +90,18 @@ const LoginForm: FC<Props> = ({
             inputName="password"
             value={values.password}
             handleChange={handleChange}
-            label={t('common.password')}
-            placeholder={t('common.password')}
             errorMessage={t(errors.password)}
+            placeholder={t('common.password')}
+            label={t('resetPassword.resetPasswordInputLabel')}
           />
-          <BaseButton large type="submit" text={t('common.login')} marginTop={30} />
+          <BaseButton large type="submit" text={t('common.continue')} marginTop={30} />
           <div className={styles.containerActions}>
             <BaseButton
               small
               isButtonLink
               fontSize={18}
-              onClick={goToRegister}
-              text={t('common.signUp')}
-            />
-            <BaseButton
-              small
-              isButtonLink
-              fontSize={18}
-              onClick={goToForgotPassword}
-              text={t('common.forgotPassword')}
+              onClick={goToLogin}
+              text={t('common.login')}
             />
           </div>
           {process.env.REACT_APP_GOOGLE_CAPTCHA && (

@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import { takeLatest, put, call } from 'redux-saga/effects';
 
 // Actions
@@ -18,10 +17,7 @@ export function* loginWorker(data: { payload: { email: string; password: string 
   try {
     yield put(loginStart());
 
-    const response: Promise<AxiosResponse<any, any>> = yield call(
-      callService,
-      data.payload,
-    );
+    const response: { data: any } = yield call(callService, data.payload);
 
     yield put(loginSuccess(response));
   } catch ({ response }) {
