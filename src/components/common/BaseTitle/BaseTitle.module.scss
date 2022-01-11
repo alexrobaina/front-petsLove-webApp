@@ -9,6 +9,10 @@
   &.pointer {
     cursor: pointer;
   }
+
+  &.capitalize {
+    text-transform: capitalize;
+  }
 }
 
 .center {

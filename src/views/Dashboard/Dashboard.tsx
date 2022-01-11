@@ -95,7 +95,7 @@ const Dashboard: FC = () => {
         />
       </div>
       {pets?.pets?.length === 0 && (
-        <BaseNotifyMessage message="No encontramos mascotas" />
+        <BaseNotifyMessage message={t('common.petsNotFound')} />
       )}
       {pets?.pets && (
         <div className={styles.containerPets}>

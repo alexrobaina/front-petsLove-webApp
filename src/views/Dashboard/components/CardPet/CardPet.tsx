@@ -39,12 +39,15 @@ const CardPet: FC<Props> = ({
           />
         </div>
         <div className={styles.containerInfo}>
-          <BaseTitle text={name} />
-          <BaseText text={adopted ? 'Adopted' : 'In adoption'} />
+          <BaseTitle capitalize text={name} />
+          <BaseText
+            capitalize
+            text={adopted ? t('common.adopted') : t('common.adoption')}
+          />
         </div>
         <div className={styles.containerDataDetail}>
           <BaseText marginRight={10} text={t('dashboard.sex')} />
-          <BaseText text={gender} />
+          <BaseText capitalize text={gender} />
         </div>
       </div>
     </div>

@@ -61,7 +61,7 @@ const Dashboard: FC<Props> = ({
         onClick={() => setIsAdopt(false)}
         className={c(isAdopt === false && styles.selected, styles.cardCount)}
       >
-        <BaseTitle center text={t('dashboard.adoption')} />
+        <BaseTitle center text={t('common.adoption')} />
         <BaseTitle center fontSize={40} marginTop={15} text={data.adoption} />
       </div>
     </div>

@@ -13,6 +13,7 @@ interface Props {
   regular?: boolean;
   marginTop?: number;
   marginLeft?: number;
+  capitalize?: boolean;
   marginRight?: number;
   marginBottom?: number;
   text?: string | number;
@@ -32,6 +33,7 @@ const BaseText: FC<Props> = ({
   medium = false,
   center = false,
   regular = false,
+  capitalize = false,
 }) => {
   return (
     <div
@@ -51,6 +53,7 @@ const BaseText: FC<Props> = ({
         center && styles.center,
         medium && styles.medium,
         regular && styles.regular,
+        capitalize && styles.capitalize,
       )}
     >
       {text}
