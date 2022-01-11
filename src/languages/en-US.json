@@ -1,5 +1,12 @@
 {
   "common.loading": "Loading",
+  "common.male": "Male",
+  "common.dogs": "Dogs",
+  "common.cats": "Cats",
+  "common.exotics": "Exotics",
+  "common.female": "Female",
+  "common.adopted": "Adopted",
+  "common.dashboardTitle": "Mis mascotas",
   "common.validationRequired": "This field is required.",
   "common.forgotPassword": "Forgot password.",
   "common.login": "Login",
@@ -25,5 +32,11 @@
   "signUp.wantToAdopt": "I want to adopt",
   "signUp.iAmShelter": "I am Shelter",
   "signUp.iAmVet": "I am Vet",
-  "signUp.organizationName": "Name of the Shelter or Veterinarian."
+  "signUp.organizationName": "Name of the Shelter or Veterinarian.",
+  "dashboard.adoption": "In adoption",
+  "dashboard.createPet": "Create Pet",
+  "dashboard.editProfile": "Edit profile",
+  "dashboard.namePet": "Name pet",
+  "dashboard.nameFilterPlaceholder": "Coco",
+  "dashboard.sex": "Sex:"
 }
