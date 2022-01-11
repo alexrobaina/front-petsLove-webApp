@@ -32,6 +32,10 @@
     font-weight: 300;
   }
 
+  &.capitalize {
+    text-transform: capitalize;
+  }
+
   @include media-breakpoint-between(xs, sm) {
     font-size: 14px;
   }

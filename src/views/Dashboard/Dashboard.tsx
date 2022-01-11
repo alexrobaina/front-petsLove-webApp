@@ -1,82 +1,127 @@
-import { FC } from 'react';
-import { AiOutlineEdit, AiOutlineFolderView } from 'react-icons/ai';
-import BaseButton from '../../components/common/BaseButton';
-import BaseImage from '../../components/common/BaseImage';
+import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import BaseInput from '../../components/common/BaseInput';
+import BaseNotifyMessage from '../../components/common/BaseNotifyMessage';
 import BaseRadioButton from '../../components/common/BaseRadioButton';
-import BaseText from '../../components/common/BaseText';
 import BaseTitle from '../../components/common/BaseTitle';
+import PaginationList from '../../components/common/PaginationList';
+import { useTranslate } from '../../hooks/useTranslate';
+import { dashboard, filterDashboardPets } from '../../store/slices/dashboard';
+import ActionsButtons from './components/ActionsButtons';
+import CardPet from './components/CardPet';
+import CardsData from './components/CardsData';
 import styles from './Dashboard.module.scss';
 
 const Dashboard: FC = () => {
+  const [namePet, setNamePet] = useState('');
+  const [gender, setGender] = useState('female');
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10);
+  const [isAdopt, setIsAdopt] = useState(false);
+  const [category, setCategoryFilter] = useState('dog');
+  const { t } = useTranslate();
+  const dispatch = useDispatch();
+  const { pets } = useSelector((state: any) => state.dashboard.petsDashboard);
+  const userString: any = localStorage.getItem('user');
+  const user: { _id: string } = JSON.parse(userString);
+  const userId: string = user?._id || '';
+
+  const handleGenderPet = (e: any) => {
+    setGender(e.target.name);
+  };
+
+  const handleNamePet = (e: any) => {
+    setNamePet(e.target.value);
+  };
+
+  const handleChangePage = (e: any, pageNumber: number) => {
+    setPage(pageNumber);
+  };
+
+  const handleViewProfile = (id: string) => {
+    window.location.replace(`${process.env.REACT_APP_NEXT_JS_APP}profile-pet/${id}`);
+  };
+
+  useEffect(() => {
+    if (userId) dispatch(dashboard({ userId }));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(
+        filterDashboardPets({
+          userId,
+          gender,
+          isAdopt,
+          namePet,
+          limit,
+          page,
+          category,
+        }),
+      );
+    }
+  }, [userId, gender, isAdopt, namePet, limit, page, category, dispatch]);
   return (
     <div className={styles.container}>
-      <BaseTitle marginBottom={50} fontSize={40} text="Dashboard" />
-      <div className={styles.containerCardCounts}>
-        <div className={styles.cardCount}>
-          <BaseTitle center text="Perros" />
-          <BaseTitle center fontSize={40} marginTop={15} text="20" />
-        </div>
-        <div className={styles.cardCount}>
-          <BaseTitle center text="Gatos" />
-          <BaseTitle center fontSize={40} marginTop={15} text="12" />
-        </div>
-        <div className={styles.cardCount}>
-          <BaseTitle center text="Exóticos" />
-          <BaseTitle center fontSize={40} marginTop={15} text="5" />
-        </div>
-        <div className={styles.cardCount}>
-          <BaseTitle center text="Adoptados" />
-          <BaseTitle center fontSize={40} marginTop={15} text="3" />
-        </div>
-        <div className={styles.cardCount}>
-          <BaseTitle center text="En adopcion" />
-          <BaseTitle center fontSize={40} marginTop={15} text="17" />
-        </div>
-      </div>
-      <div>
-        <div className={styles.actionCreateNewPet}>
-          <BaseButton marginTop={50} text="Create Pet" />
-          <BaseButton marginTop={50} text="Edit profile" />
-        </div>
-        <BaseInput
-          testId="asd"
-          marginTop={20}
-          inputName="search"
-          label="Name filter"
-          placeholder="buscar mascota por nombre"
+      <BaseTitle marginBottom={50} fontSize={40} text={t('common.dashboardTitle')} />
+      <CardsData
+        isAdopt={isAdopt}
+        setIsAdopt={setIsAdopt}
+        categoryFilter={category}
+        setCategoryFilter={setCategoryFilter}
+      />
+      <ActionsButtons />
+      <BaseInput
+        marginTop={20}
+        inputName="search"
+        testId="name-filter-pet"
+        label={t('dashboard.namePet')}
+        handleChange={handleNamePet}
+        placeholder={t('dashboard.nameFilterPlaceholder')}
+      />
+      <div className={styles.containerFilters}>
+        <BaseRadioButton
+          inputName="female"
+          text={t('common.female')}
+          handleChange={handleGenderPet}
+          isChecked={gender === 'female'}
         />
-        <div className={styles.containerFilters}>
-          <BaseRadioButton isChecked handleChange={() => {}} text="Adopted" />
-          <BaseRadioButton isChecked handleChange={() => {}} text="Adopt" />
-          <BaseRadioButton isChecked handleChange={() => {}} text="Female" />
-          <BaseRadioButton isChecked handleChange={() => {}} text="Male" />
-        </div>
+        <BaseRadioButton
+          inputName="male"
+          text={t('common.male')}
+          isChecked={gender === 'male'}
+          handleChange={handleGenderPet}
+        />
       </div>
-      <div className={styles.containerPets}>
-        <div className={styles.card}>
-          <BaseImage
-            width="100%"
-            height="200px"
-            objectFit="cover"
-            src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2274&q=80"
-          />
-          <div className={styles.cardInfo}>
-            <div className={styles.containerActions}>
-              <BaseButton icon={<AiOutlineEdit size={20} />} />
-              <BaseButton icon={<AiOutlineFolderView size={20} />} />
-            </div>
-            <div className={styles.containerInfo}>
-              <BaseTitle text="Sotopo" />
-              <BaseText text="Adopted" />
-            </div>
-            <div className={styles.containerDataDetail}>
-              <BaseText marginRight={10} text="sexo:" />
-              <BaseText text="female" />
-            </div>
-          </div>
+      {pets?.pets?.length === 0 && (
+        <BaseNotifyMessage message={t('common.petsNotFound')} />
+      )}
+      {pets?.pets && (
+        <div className={styles.containerPets}>
+          {pets.pets.map((pet: any) => {
+            return (
+              <CardPet
+                id={pet._id}
+                key={pet._id}
+                name={pet.name}
+                images={pet.images}
+                gender={pet.gender}
+                adopted={pet.adopted}
+                handleViewProfile={handleViewProfile}
+              />
+            );
+          })}
         </div>
-      </div>
+      )}
+      {pets.pets?.length > 0 && (
+        <PaginationList
+          page={page}
+          limit={limit}
+          total={pets.total}
+          handleChange={handleChangePage}
+        />
+      )}
     </div>
   );
 };

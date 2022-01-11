@@ -1,5 +1,13 @@
 {
   "common.loading": "Cargando",
+  "common.male": "Macho",
+  "common.female": "Hembra",
+  "common.adopted": "Adoptados",
+  "common.adoption": "En adopcion",
+  "common.dogs": "Perros",
+  "common.cats": "Gatos",
+  "common.exotics": "Exóticos",
+  "common.dashboardTitle": "Mis mascotas",
   "common.validationRequired": "Este campo es requerido.",
   "common.forgotPassword": "Olvidé mi contraseña.",
   "common.login": "Iniciar sesión",
@@ -8,6 +16,7 @@
   "common.phone": "Teléfono",
   "common.name": "Nombre",
   "common.password": "Contraseña",
+  "common.petsNotFound": "No se encontraron mascotas",
   "common.validationEmail": "El email no es correcto.",
   "common.signUp": "Registrarme",
   "common.somethingIsWrong": "Algo salio mal, intente de nuevo.",
@@ -25,5 +34,10 @@
   "signUp.wantToAdopt": "Quiero adoptar.",
   "signUp.iAmShelter": "Soy un refugio.",
   "signUp.iAmVet": "Soy veterinario.",
-  "signUp.organizationName": "Nombre de la Regufio o veterinaria."
+  "signUp.organizationName": "Nombre de la Regufio o veterinaria.",
+  "dashboard.createPet": "Crear mascota",
+  "dashboard.editProfile": "Editar perfil",
+  "dashboard.namePet": "Nombre de la mascota",
+  "dashboard.nameFilterPlaceholder": "Manchas",
+  "dashboard.sex": "Sexo:"
 }

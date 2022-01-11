@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { IoMdLogOut } from 'react-icons/io';
 import { BiSearchAlt } from 'react-icons/bi';
+import { BsFillHeartFill } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 import { LOGIN } from '../../navigation/routes/routes';
 import BaseTitle from '../common/BaseTitle';
@@ -35,7 +36,8 @@ const Header: FC<Props> = ({
   return (
     <div data-testid="header-app" className={styles.header}>
       <a className={styles.iconButton} href={`${process.env.REACT_APP_NEXT_JS_APP}`}>
-        <BaseTitle fontSize={18} text="Pets Love" />
+        <BaseTitle marginRight={5} fontSize={18} text="Pets" />
+        <BsFillHeartFill size={20} />
       </a>
       <div className={styles.containerNavegation}>
         {/* <ThemeChange changeTheme={changeTheme} theme={theme} /> */}

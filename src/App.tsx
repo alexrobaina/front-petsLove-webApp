@@ -9,6 +9,9 @@ import Dashboard from './views/Dashboard';
 import PrivateRoute from './navigation/PrivateRoute';
 import { LOGIN, DASHBOARD } from './navigation/routes/routes';
 import './App.scss';
+import axiosInterceptors from './store/api/axiosInterceptors';
+
+axiosInterceptors(localStorage.getItem('token') || '');
 
 function App() {
   return (
