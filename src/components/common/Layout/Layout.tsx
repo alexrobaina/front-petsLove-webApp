@@ -7,16 +7,18 @@ import styles from './Layout.module.scss';
 interface Props {
   testId: string;
   center?: boolean;
+  paddingBottom?: number;
   children?: ReactElement;
 }
 
-const Layout: FC<Props> = ({ children, testId, center }) => {
+const Layout: FC<Props> = ({ children, testId, center, paddingBottom }) => {
   return (
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={VARIANTS_OPACITY}
+      style={{ paddingBottom }}
       className={styles.layout}
+      variants={VARIANTS_OPACITY}
       transition={{ ease: 'easeOut', delay: 0.2 }}
     >
       <div

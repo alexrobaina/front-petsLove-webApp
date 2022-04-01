@@ -7,7 +7,7 @@ import BaseRadioButton from '../../components/common/BaseRadioButton';
 import BaseTitle from '../../components/common/BaseTitle';
 import PaginationList from '../../components/common/PaginationList';
 import { useTranslate } from '../../hooks/useTranslate';
-import { dashboard, filterDashboardPets } from '../../store/slices/dashboard';
+import { dashboard, filterDashboardPets } from '../../store/slices/user/dashboard';
 import ActionsButtons from './components/ActionsButtons';
 import CardPet from './components/CardPet';
 import CardsData from './components/CardsData';
@@ -27,16 +27,18 @@ const Dashboard: FC = () => {
   const user: { _id: string } = JSON.parse(userString);
   const userId: string = user?._id || '';
 
+  const handleChangePage = (e: any, pageNumber: number) => {
+    setPage(pageNumber);
+  };
+
   const handleGenderPet = (e: any) => {
+    setPage(1);
     setGender(e.target.name);
   };
 
   const handleNamePet = (e: any) => {
+    setPage(1);
     setNamePet(e.target.value);
-  };
-
-  const handleChangePage = (e: any, pageNumber: number) => {
-    setPage(pageNumber);
   };
 
   const handleViewProfile = (id: string) => {
@@ -62,6 +64,7 @@ const Dashboard: FC = () => {
       );
     }
   }, [userId, gender, isAdopt, namePet, limit, page, category, dispatch]);
+
   return (
     <div className={styles.container}>
       <BaseTitle marginBottom={50} fontSize={40} text={t('common.dashboardTitle')} />
@@ -76,8 +79,8 @@ const Dashboard: FC = () => {
         marginTop={20}
         inputName="search"
         testId="name-filter-pet"
-        label={t('dashboard.namePet')}
         handleChange={handleNamePet}
+        label={t('dashboard.namePet')}
         placeholder={t('dashboard.nameFilterPlaceholder')}
       />
       <div className={styles.containerFilters}>

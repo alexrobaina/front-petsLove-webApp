@@ -1,5 +1,5 @@
-import reducer, * as account from '../login';
-import { initialState } from '../login';
+import reducer, * as account from '../auth/login';
+import { initialState } from '../auth/login';
 
 describe('EXAMPLE account slice', () => {
   test('loginStart action', () => {

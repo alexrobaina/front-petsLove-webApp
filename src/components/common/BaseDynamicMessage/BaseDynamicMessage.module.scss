@@ -1,0 +1,57 @@
+@import '../../../styles/mixings.scss';
+
+.text {
+  font-size: 12px;
+  line-height: 18px;
+  font-family: varr(--main-font-regular);
+  color: var(--input-error);
+  margin-top: 2px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerTextCloseButton {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--button-link);
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: underline;
+  height: 25px;
+  margin-top: 31px;
+
+  @include media-breakpoint-between(xs, sm) {
+    display: none;
+  }
+}
+
+.textCloseButton {
+  width: 40px;
+  cursor: pointer;
+}
+
+.containerCloseIcon {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--button-link);
+  margin-top: 31px;
+}
+
+.closeIcon {
+  width: 30px;
+  cursor: pointer;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+}
+
+.actionText {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}

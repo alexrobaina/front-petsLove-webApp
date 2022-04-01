@@ -6,10 +6,11 @@ import WrapperConfig from './components/WrapperConfig';
 import store from './store';
 import Login from './views/Login';
 import Dashboard from './views/Dashboard';
+import PageNotFound from './views/PageNotFound';
 import PrivateRoute from './navigation/PrivateRoute';
-import { LOGIN, DASHBOARD } from './navigation/routes/routes';
-import './App.scss';
+import { LOGIN, DASHBOARD, PAGE_NOT_FOUND } from './navigation/routes/routes';
 import axiosInterceptors from './store/api/axiosInterceptors';
+import './App.scss';
 
 axiosInterceptors(localStorage.getItem('token') || '');
 
@@ -24,6 +25,7 @@ function App() {
               {navigation.map((nav: { path: string; component: ComponentType }) => {
                 return <Route key={nav.path} path={nav.path} component={nav.component} />;
               })}
+              <Route path={PAGE_NOT_FOUND} component={PageNotFound} />
               <PrivateRoute
                 exact
                 path={DASHBOARD}

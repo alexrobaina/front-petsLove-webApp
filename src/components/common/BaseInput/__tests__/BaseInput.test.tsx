@@ -3,9 +3,15 @@ import { render } from '../../../../tests';
 import BaseInput from '../BaseInput';
 
 describe('<BaseInput />', () => {
+  const handleChange = () => {};
   test('Should component must render correctly', () => {
     const { getByText }: any = render(
-      <BaseInput placeholder="Input test" inputName="test" label="email" />,
+      <BaseInput
+        handleChange={handleChange}
+        placeholder="Input test"
+        inputName="test"
+        label="email"
+      />,
       {},
     );
 
@@ -15,10 +21,11 @@ describe('<BaseInput />', () => {
   test('Should render icons password', () => {
     const { getByTestId }: any = render(
       <BaseInput
-        label="email"
+        label="password"
         type="password"
         inputName="test"
         placeholder="Input test"
+        handleChange={handleChange}
       />,
       {},
     );
@@ -34,6 +41,7 @@ describe('<BaseInput />', () => {
         inputName="test"
         placeholder="Input test"
         errorMessage="email error"
+        handleChange={handleChange}
       />,
       {},
     );
@@ -50,6 +58,7 @@ describe('<BaseInput />', () => {
         inputName="test"
         placeholder="Input test"
         errorMessage="email error"
+        handleChange={handleChange}
       />,
       {},
     );

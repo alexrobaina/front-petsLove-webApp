@@ -24,7 +24,7 @@ interface Props {
   onBlur?: (value: string) => void;
   errorMessage?: string | undefined;
   onKeyPress?: (value: string) => void;
-  handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const BaseInput: FC<Props> = ({

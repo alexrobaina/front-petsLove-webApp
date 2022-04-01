@@ -1,26 +1,15 @@
-import { FC, useState, ReactChild, useCallback, useEffect } from 'react';
+import { FC, useState, useCallback, useEffect } from 'react';
 import { GoogleApiWrapper } from 'google-maps-react';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-import styles from './googleAutocomplete.module.scss';
 import { useTranslate } from '../../../hooks/useTranslate';
+import BaseLabel from '../BaseLabel';
 
-interface Props {
-  name?: string;
-  label?: string;
-  inputRef?: any;
-  icon?: ReactChild;
-  placeholder?: string;
-  handleSearch?: Function;
-  inputStoreError?: boolean;
-  handleChangeAddress?: Function;
-  handleChangeTextAddress?: Function;
-  handleChangeAddressComponents?: Function;
-}
+import styles from './googleAutocomplete.module.scss';
 
-const GoogleAutocomplete: FC<Props> = ({
+const GoogleAutocomplete: FC<any> = ({
   name = '',
   label = '',
   icon = null,
@@ -33,13 +22,15 @@ const GoogleAutocomplete: FC<Props> = ({
 }) => {
   const [address, setAddress] = useState('');
   const { t } = useTranslate();
+
   const handleChange = useCallback((addressChange: string) => {
     if (addressChange === '') {
       if (handleChangeTextAddress && handleChangeAddressComponents) {
         handleChangeAddressComponents([]);
       }
     }
-    setAddress(address);
+
+    setAddress(addressChange);
   }, []);
 
   const configAddress = async (addressSelected: string) => {
@@ -55,6 +46,7 @@ const GoogleAutocomplete: FC<Props> = ({
     if (handleChangeTextAddress) {
       handleChangeTextAddress(addressSelected);
     }
+
     const results = await geocodeByAddress(addressSelected);
     const latLng = await getLatLng(results[0]);
 
@@ -88,7 +80,7 @@ const GoogleAutocomplete: FC<Props> = ({
           return (
             <>
               <div className={styles.containerInput}>
-                {label && <div>{label}</div>}
+                {label && <BaseLabel bold text={label} />}
                 {/* @ts-ignore */}
                 <input
                   name={name}

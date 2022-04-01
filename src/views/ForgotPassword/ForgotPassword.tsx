@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import Layout from '../../components/common/Layout';
 import ForgotPasswordForm from './components/ForgotPasswordForm';
-import { forgotPassword } from '../../store/slices/forgotPassword';
+import { forgotPassword } from '../../store/slices/auth/forgotPassword';
 import { validationForgotPassword } from './helpers/validationInputSchema';
 import { LOGIN } from '../../navigation/routes/routes';
 

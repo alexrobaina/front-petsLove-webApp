@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import ResetPasswordForm from './components/ResetPasswordForm';
-import { cleanErrorsAction, resetPassword } from '../../store/slices/resetPassword';
+import { cleanErrorsAction, resetPassword } from '../../store/slices/auth/resetPassword';
 import { validationResetPasseword } from './helpers/validationInputSchema';
 import { LOGIN } from '../../navigation/routes/routes';
 import Layout from '../../components/common/Layout';

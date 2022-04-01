@@ -8,10 +8,10 @@ import {
   loginSuccess,
   loginFailure,
   cleanErrorsAction,
-} from '../slices/login';
+} from '../../slices/auth/login';
 
 // Api
-import { login as callService } from '../api/login';
+import { login as callService } from '../../api/auth/login';
 
 export function* loginWorker(data: { payload: { email: string; password: string } }) {
   try {

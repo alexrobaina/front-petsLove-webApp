@@ -11,15 +11,15 @@
   }
 
   @include media-breakpoint-between(sm, md) {
-    padding: 0 200px 0 200px;
+    padding: 0 100px 0 100px;
   }
 
   @include media-breakpoint-between(md, xl) {
-    padding: 0 300px 0 300px;
+    padding: 0 200px 0 200px;
   }
 
   @include media-breakpoint-between(xl, xxl) {
-    padding: 0 500px 0 500px;
+    padding: 0 400px 0 400px;
   }
 
   &.center {

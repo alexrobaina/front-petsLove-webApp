@@ -1,6 +1,6 @@
 import { testSaga } from 'redux-saga-test-plan';
-import * as loginActions from '../../slices/login';
-import * as loginSagasRoot from '../login';
+import * as loginActions from '../../slices/auth/login';
+import * as loginSagasRoot from '../auth/login';
 import { axiosMock } from '../../../__mocks__/axiosMock';
 
 describe('EXAMPLE sagas', () => {

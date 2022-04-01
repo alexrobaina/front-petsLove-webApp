@@ -1,9 +1,10 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { IoMdLogOut } from 'react-icons/io';
 import { BiSearchAlt } from 'react-icons/bi';
 import { BsFillHeartFill } from 'react-icons/bs';
+import { MdDashboard } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
-import { LOGIN } from '../../navigation/routes/routes';
+import { DASHBOARD, LOGIN } from '../../navigation/routes/routes';
 import BaseTitle from '../common/BaseTitle';
 import BasicMenu from '../common/BasicMenu';
 // import ThemeChange from './components/ThemeChange';
@@ -33,12 +34,24 @@ const Header: FC<Props> = ({
     history.push(LOGIN);
   };
 
+  const goToDashboard = useCallback(() => {
+    history.push(DASHBOARD);
+  }, []);
+
   return (
     <div data-testid="header-app" className={styles.header}>
-      <a className={styles.iconButton} href={`${process.env.REACT_APP_NEXT_JS_APP}`}>
-        <BaseTitle marginRight={5} fontSize={18} text="Pets" />
-        <BsFillHeartFill size={20} />
-      </a>
+      {token ? (
+        <MdDashboard
+          size={28}
+          onClick={goToDashboard}
+          className={styles.dashboardAction}
+        />
+      ) : (
+        <a className={styles.iconButton} href={`${process.env.REACT_APP_NEXT_JS_APP}`}>
+          <BaseTitle marginRight={5} fontSize={18} text="Pets" />
+          <BsFillHeartFill size={20} />
+        </a>
+      )}
       <div className={styles.containerNavegation}>
         {/* <ThemeChange changeTheme={changeTheme} theme={theme} /> */}
         <BasicMenu handleSelectItem={setLanguage} items={ITEMS} />

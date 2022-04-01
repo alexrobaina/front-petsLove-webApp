@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import c from 'classnames';
 import styles from './BaseText.module.scss';
 
@@ -16,11 +16,13 @@ interface Props {
   capitalize?: boolean;
   marginRight?: number;
   marginBottom?: number;
-  text?: string | number;
+  text: string | number;
+  onClick?: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
 const BaseText: FC<Props> = ({
   testId,
+  onClick,
   fontSize,
   text = 16,
   marginTop,
@@ -45,6 +47,7 @@ const BaseText: FC<Props> = ({
         marginRight,
         marginBottom,
       }}
+      onClick={onClick}
       data-testid={`text-${testId}`}
       className={c(
         styles.text,

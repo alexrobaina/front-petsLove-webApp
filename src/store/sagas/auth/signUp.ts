@@ -9,10 +9,10 @@ import {
   signUpSuccess,
   signUpFailure,
   cleanErrorsAction,
-} from '../slices/signUp';
+} from '../../slices/auth/signUp';
 
 // Api
-import { signUp as callService } from '../api/signUp';
+import { signUp as callService } from '../../api/auth/signUp';
 
 export function* signUpWorker(data: {
   payload: {

@@ -1,9 +1,11 @@
 import { all } from 'redux-saga/effects';
-import loginSagas from './login';
-import signUpSagas from './signUp';
-import forgortPasswordSagas from './forgotPassword';
-import dashboardSagas from './dashboard';
-import resetPasswordSagas from './resetPassword';
+import loginSagas from './auth/login';
+import signUpSagas from './auth/signUp';
+import forgortPasswordSagas from './auth/forgotPassword';
+import dashboardSagas from './user/dashboard';
+import listUsersTypeRoleSagas from './user/getUsersTypeRole';
+import resetPasswordSagas from './auth/resetPassword';
+import createPetSagas from './pet/createPet';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +14,7 @@ export default function* rootSaga() {
     forgortPasswordSagas(),
     resetPasswordSagas(),
     dashboardSagas(),
+    createPetSagas(),
+    listUsersTypeRoleSagas(),
   ]);
 }
