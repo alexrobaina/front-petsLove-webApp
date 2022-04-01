@@ -29,7 +29,15 @@ const CardPet: FC<Props> = ({
 
   return (
     <div className={styles.card}>
-      <BaseImage width="100%" height="200px" objectFit="cover" src={images[0]} />
+      <BaseImage
+        width="100%"
+        height="200px"
+        objectFit="cover"
+        src={`${
+          process.env.REACT_APP_AWS_IMAGE_PETS_URL_BASE ||
+          'https://petslove-bucket-2.s3.amazonaws.com/pets/'
+        }${images[0]}`}
+      />
       <div className={styles.cardInfo}>
         <div className={styles.containerActions}>
           <BaseButton icon={<AiOutlineEdit size={20} />} />

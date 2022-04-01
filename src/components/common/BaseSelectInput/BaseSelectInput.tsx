@@ -1,7 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import Select from 'react-select';
 import { useTranslate } from '../../../hooks/useTranslate';
-import { getColor } from '../../../utils/getColor';
 import BaseErrorMessage from '../BaseErrorMessage';
 import BaseLabel from '../BaseLabel';
 import styles from './BaseSelectInput.module.scss';
@@ -49,7 +48,7 @@ const BaseSelectInput: FC<ISelectInputProps> = ({
 
   return (
     <div data-testid={`react-select-${testId}`} style={{ marginTop, marginBottom }}>
-      {label && <BaseLabel text={label} />}
+      {label && <BaseLabel bold text={label} />}
       <Select
         styles={styles}
         name={inputName}
@@ -58,7 +57,7 @@ const BaseSelectInput: FC<ISelectInputProps> = ({
         placeholder={placeholder}
         className={styles.select}
         isClearable={isClearable}
-        value={options.find((option) => option.value === value)}
+        value={value && options.find((option) => option.value === value)}
         components={{
           IndicatorSeparator: null,
         }}
@@ -69,12 +68,10 @@ const BaseSelectInput: FC<ISelectInputProps> = ({
           ...theme,
           colors: {
             ...theme.colors,
-            neutral30: getColor('--input-hover'),
-            neutral20: errorMessage
-              ? getColor('--input-error')
-              : getColor('--input-border-color'),
-            primary50: getColor('--input-hover'),
-            primary: getColor('--input-focus'),
+            neutral30: '#ed6193',
+            neutral20: errorMessage ? '#ce0000' : '#5e92f3',
+            primary50: '#ed6193',
+            primary: '#ed6193',
           },
         })}
       />

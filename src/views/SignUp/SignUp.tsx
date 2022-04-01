@@ -14,7 +14,7 @@ import {
   USER_SHELTER_ROLE,
   USER_VET_ROLE,
 } from '../../constants/roles';
-import { signUp } from '../../store/slices/signUp';
+import { signUp } from '../../store/slices/auth/signUp';
 import { TSignUpForm } from './types';
 import { signUpState } from './constants';
 import styles from './SignUp.module.scss';
@@ -80,8 +80,8 @@ const SignUp: FC = () => {
         testId="sign-up"
         goToLogin={goToLogin}
         captchaRef={captchaRef}
-        errorCaptcha={errorCaptcha}
         submitForm={handleSubmit}
+        errorCaptcha={errorCaptcha}
         handleChange={handleChange}
         setFieldValue={setFieldValue}
       />

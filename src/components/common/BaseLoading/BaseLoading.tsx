@@ -14,6 +14,7 @@ interface Props {
 
 const BaseLoading: FC<Props> = ({
   testId,
+  center,
   marginTop = 0,
   small = false,
   isLoadingButton = false,
@@ -36,7 +37,11 @@ const BaseLoading: FC<Props> = ({
       style={{ marginTop }}
       data-testid={`loading-${testId}`}
       transition={{ ease: 'easeOut', delay: 0.1 }}
-      className={c(styles.container, isLoadingButton && styles.isLoading)}
+      className={c(
+        styles.container,
+        center && styles.center,
+        isLoadingButton && styles.isLoading,
+      )}
     >
       <CgSpinner
         className={c(styles.spinner, isLoadingButton && styles.isLoadingButton)}

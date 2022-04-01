@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import LoginForm from './components/LoginForm';
-import { cleanErrorsAction, login } from '../../store/slices/login';
+import { cleanErrorsAction, login } from '../../store/slices/auth/login';
 import { validationLogin } from './helpers/validationInputSchema';
 import { FORGOT_PASSWORD, SIGN_UP, DASHBOARD } from '../../navigation/routes/routes';
 import BaseImage from '../../components/common/BaseImage';

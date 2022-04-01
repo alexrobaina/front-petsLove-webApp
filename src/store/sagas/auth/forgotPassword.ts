@@ -9,10 +9,10 @@ import {
   forgotPasswordSuccess,
   forgotPasswordFailure,
   cleanErrorsAction,
-} from '../slices/forgotPassword';
+} from '../../slices/auth/forgotPassword';
 
 // Api
-import { forgotPassword as callService } from '../api/forgotPassword';
+import { forgotPassword as callService } from '../../api/auth/forgotPassword';
 
 export function* forgotPasswordWorker(data: {
   payload: {

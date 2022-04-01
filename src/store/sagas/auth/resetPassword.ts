@@ -9,10 +9,10 @@ import {
   resetPasswordStart,
   resetPasswordSuccess,
   resetPasswordFailure,
-} from '../slices/resetPassword';
+} from '../../slices/auth/resetPassword';
 
 // Api
-import { resetPassword as callService } from '../api/resetPassword';
+import { resetPassword as callService } from '../../api/auth/resetPassword';
 
 export function* resetPasswordWorker(data: {
   payload: {

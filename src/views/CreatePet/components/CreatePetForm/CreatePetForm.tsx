@@ -1,50 +1,109 @@
-import { FC, ChangeEvent } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import { FC, useState, useCallback, useEffect, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
-import { FormikErrors } from 'formik';
-import { useSelector } from 'react-redux';
+
 import BaseInput from '../../../../components/common/BaseInput';
-import BaseNotifyMessage from '../../../../components/common/BaseNotifyMessage';
 import BaseButton from '../../../../components/common/BaseButton';
 import BaseTitle from '../../../../components/common/BaseTitle';
 import { VARIANTS_OPACITY } from '../../../../constants/animation';
 import { useTranslate } from '../../../../hooks/useTranslate';
-import BaseErrorMessage from '../../../../components/common/BaseErrorMessage';
+import BaseTextarea from '../../../../components/common/BaseTextarea';
+import BaseSelectInput from '../../../../components/common/BaseSelectInput';
+import GoogleAutocomplete from '../../../../components/common/GoogleAutocomplete';
+import BaseRadioButton from '../../../../components/common/BaseRadioButton';
+import PopUp from '../../../../components/common/PopUp';
+import MedicalNotesItem from '../MedicalNotesItems';
+import { ICreatePetFormProps } from '../../types';
+import InputUploadImage from '../../../../components/common/InputUploadImage';
+
 import styles from './CreatePetForm.module.scss';
 
-interface Props {
-  testId: string;
-  submitForm: any;
-  captchaRef: any;
-  errorCaptcha: string;
-  goToRegister: () => void;
-  goToForgotPassword: () => void;
-  values: { email: string; password: string };
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errors: FormikErrors<{ email: string; password: string }>;
-}
-
-const CreatePetForm: FC<Props> = ({
+const CreatePetForm: FC<ICreatePetFormProps> = ({
   testId,
   values,
   errors,
-  captchaRef,
   submitForm,
   handleChange,
-  goToRegister,
-  errorCaptcha,
-  goToForgotPassword,
+  setFieldValue,
+  goToDashboard,
+  usersVetEmailList,
+  usersAdoptedEmailList,
 }) => {
   const { t } = useTranslate();
-  const { data } = useSelector((state: any) => state.login);
+  const [modalIsOpen, setModal] = useState(false);
+  const [canAddMedicalNote, setCanAddMedicalNote] = useState(true);
 
-  const setErrorMessageComponent = (errorCode: number) => {
-    if (errorCode === 2)
-      return <BaseNotifyMessage canClose message={t('login.documentNotFound')} />;
-    if (errorCode === 1)
-      return <BaseNotifyMessage canClose message={t('login.credentialsError')} />;
-    return null;
+  const closeModalMedicalNote = () => {
+    setModal(false);
   };
+
+  const categoryOptions = [
+    { label: t('common.dog'), value: 'dog' },
+    { label: t('common.cat'), value: 'cat' },
+    { label: t('common.exotic'), value: 'exotic' },
+  ];
+
+  const addMedicalNote = (): void => {
+    closeModalMedicalNote();
+    values.medicalNotes.push({
+      description: values.detailMedicalNote,
+      title: values.titleMedicalNote,
+    });
+  };
+
+  const handleChangeAddress = (location: any) => {
+    setFieldValue('location', location);
+  };
+
+  const handleChangeAddressComponents = useCallback((addressComponent: any) => {
+    if (addressComponent?.address_components) {
+      addressComponent.address_components.forEach((components: any) => {
+        components.types.forEach((type: string) => {
+          if (type === 'country') {
+            setFieldValue('country', components.long_name);
+          }
+          if (type === 'administrative_area_level_1') {
+            setFieldValue('city', components.long_name);
+          }
+        });
+      });
+    }
+  }, []);
+
+  const handleChangeTextAddress = useCallback((address: any) => {
+    setFieldValue('textAddress', address);
+  }, []);
+
+  const validateMedicalNote = useCallback(() => {
+    return values.detailMedicalNote === '' || values.titleMedicalNote === '';
+  }, [values]);
+
+  const handleChangeMedicalDetail = (e: ChangeEvent<HTMLInputElement>): void => {
+    setCanAddMedicalNote(validateMedicalNote());
+    values.detailMedicalNote = e.target.value;
+  };
+
+  const handleChangeMedicalTitle = (e: ChangeEvent<HTMLInputElement>): void => {
+    setCanAddMedicalNote(validateMedicalNote());
+    values.titleMedicalNote = e.target.value;
+  };
+
+  const handleCloseModal = () => {
+    setModal(true);
+    values.detailMedicalNote = '';
+    values.titleMedicalNote = '';
+  };
+
+  const handleDelete = useCallback(
+    (indexNote: number): void => {
+      values.medicalNotes.splice(indexNote, 1);
+      setFieldValue('medicalNotes', values.medicalNotes);
+    },
+    [values.medicalNotes],
+  );
+
+  useEffect(() => {
+    setCanAddMedicalNote(validateMedicalNote());
+  }, [setCanAddMedicalNote, validateMedicalNote, values.titleMedicalNote]);
 
   return (
     <div data-testid={`form-container-${testId}`} className={styles.container}>
@@ -52,68 +111,194 @@ const CreatePetForm: FC<Props> = ({
         <motion.div
           initial="hidden"
           animate="visible"
-          data-testid="loguin"
+          data-testid="create-pet"
           variants={VARIANTS_OPACITY}
           transition={{ ease: 'easeOut', delay: 0.2 }}
         >
           <BaseTitle
             center
-            fontSize={30}
+            color="#43455"
+            fontSize={50}
             marginTop={40}
             marginBottom={60}
-            text={t('common.createPet')}
+            text={t('createPet.createPet')}
           />
-          {data?.code && setErrorMessageComponent(data?.code)}
+          <InputUploadImage setFieldValue={setFieldValue} marginBottom={20} />
+          <BaseRadioButton
+            inputName="adopted"
+            text={t('createPet.isAdopted')}
+            isChecked={values.adopted === true}
+            setFieldValue={() => {
+              setFieldValue('adopted', !values.adopted);
+            }}
+          />
           <BaseInput
             type="text"
             marginTop={10}
             testId={testId}
-            inputName="email"
-            value={values.email}
-            label={t('common.email')}
+            inputName="name"
+            value={values.name}
             handleChange={handleChange}
-            placeholder="alexgomez@gmail.com"
-            errorMessage={t(errors.email)}
+            errorMessage={t(errors.name)}
+            label={t('createPet.namePet')}
+            placeholder={t('createPet.namePetPlaceholder')}
           />
           <BaseInput
+            type="date"
             marginTop={10}
             testId={testId}
-            type="password"
-            marginBottom={30}
-            inputName="password"
-            value={values.password}
+            inputName="age"
+            value={values.age}
+            label={t('common.age')}
             handleChange={handleChange}
-            label={t('common.password')}
-            placeholder={t('common.password')}
-            errorMessage={t(errors.password)}
+            errorMessage={t(errors.age)}
+            placeholder={t('createPet.agePetPlaceholder')}
           />
-          <BaseButton large type="submit" text={t('common.login')} marginTop={30} />
-          <div className={styles.containerActions}>
-            <BaseButton
-              small
-              isButtonLink
-              fontSize={18}
-              onClick={goToRegister}
-              text={t('common.signUp')}
-            />
-            <BaseButton
-              small
-              isButtonLink
-              fontSize={18}
-              onClick={goToForgotPassword}
-              text={t('common.forgotPassword')}
-            />
-          </div>
-          {process.env.REACT_APP_GOOGLE_CAPTCHA && (
-            <div className={styles.containerCaptcha}>
-              <ReCAPTCHA
-                size="normal"
-                ref={captchaRef}
-                sitekey={process.env.REACT_APP_GOOGLE_CAPTCHA || ''}
+          <BaseInput
+            type="text"
+            marginTop={10}
+            testId={testId}
+            inputName="color"
+            value={values.color}
+            label={t('common.color')}
+            handleChange={handleChange}
+            errorMessage={t(errors.color)}
+            placeholder={t('createPet.colorPetPlaceholder')}
+          />
+          <BaseInput
+            type="number"
+            marginTop={10}
+            testId={testId}
+            marginBottom={10}
+            inputName="weight"
+            value={values.weight}
+            label={t('common.weight')}
+            handleChange={handleChange}
+            errorMessage={t(errors.weight)}
+            placeholder={t('createPet.weightPetPlaceholder')}
+          />
+          <GoogleAutocomplete
+            name="google"
+            label={t('createPet.petLocation')}
+            handleChangeAddress={handleChangeAddress}
+            handleChangeTextAddress={handleChangeTextAddress}
+            placeholder={t('createPet.petLocationPlaceHolder')}
+            handleChangeAddressComponents={handleChangeAddressComponents}
+          />
+          <BaseSelectInput
+            marginTop={10}
+            testId="category"
+            inputName="category"
+            value={values.category}
+            options={categoryOptions}
+            label={t('common.category')}
+            placeholder={t('common.dog')}
+            setFieldValue={setFieldValue}
+            errorMessage={t(errors.category)}
+          />
+          <BaseSelectInput
+            marginTop={10}
+            testId="gender"
+            inputName="gender"
+            value={values.gender}
+            label={t('common.gender')}
+            setFieldValue={setFieldValue}
+            placeholder={t('common.gender')}
+            options={[
+              { label: t('common.male'), value: 'male' },
+              { label: t('common.female'), value: 'female' },
+            ]}
+            errorMessage={t(errors.gender)}
+          />
+          <BaseSelectInput
+            marginTop={10}
+            testId="user-adopted"
+            inputName="userAdopted"
+            setFieldValue={setFieldValue}
+            options={usersAdoptedEmailList}
+            value={values.userAdopted || ''}
+            label={t('createPet.userAdopterEmail')}
+            placeholder={t('createPet.adopterEmailPlanceholder')}
+          />
+          <BaseSelectInput
+            testId="vet"
+            marginTop={10}
+            inputName="userVet"
+            label={t('common.vet')}
+            value={values.userVet || ''}
+            options={usersVetEmailList}
+            setFieldValue={setFieldValue}
+            placeholder={t('createPet.vetEmailPlanceholder')}
+          />
+          <BaseTextarea
+            marginTop={10}
+            testId={testId}
+            inputName="description"
+            value={values.description}
+            handleChange={handleChange}
+            label={t('common.description')}
+            errorMessage={t(errors.description)}
+            placeholder={t('createPet.petDescriptionPlaceHolder')}
+          />
+          <BaseTitle marginTop={20} text={t('common.medicalNotes')} />
+          <PopUp
+            modalIsOpen={modalIsOpen}
+            handleCloseModal={closeModalMedicalNote}
+            title={t('createPet.titleModalMedicalNote')}
+          >
+            <>
+              <BaseInput
+                type="text"
+                marginTop={10}
+                testId={testId}
+                inputName="titleMedicalNote"
+                value={values.titleMedicalNote}
+                label={t('createPet.titleMedicalNote')}
+                handleChange={handleChangeMedicalTitle}
+                errorMessage={t(errors.titleMedicalNote)}
+                placeholder={t('createPet.titleMedicalNotePlaceholder')}
               />
-              {errorCaptcha && <BaseErrorMessage text={t(errorCaptcha)} />}
-            </div>
+              <BaseTextarea
+                marginTop={10}
+                testId={testId}
+                inputName="detailMedicalNote"
+                value={values.detailMedicalNote}
+                handleChange={handleChangeMedicalDetail}
+                errorMessage={t(errors.detailMedicalNote)}
+                label={t('createPet.detailMedicalNoteLabel')}
+                placeholder={t('createPet.detailMedicalNotePlaceholder')}
+              />
+              <div className={styles.containerButtonMedicalModal}>
+                <BaseButton
+                  medium
+                  marginTop={15}
+                  text={t('common.add')}
+                  onClick={addMedicalNote}
+                  disabled={canAddMedicalNote}
+                />
+              </div>
+            </>
+          </PopUp>
+          {values.medicalNotes.map(
+            (note: { title: string; description: string }, index: number) => (
+              <MedicalNotesItem
+                key={note.title}
+                title={note.title}
+                description={note.description}
+                handleDelete={() => handleDelete(index)}
+                testId={`medical-notes-item-${note.title}`}
+              />
+            ),
           )}
+          <BaseButton
+            marginTop={15}
+            onClick={handleCloseModal}
+            text={t('createPet.createMedicalNote')}
+          />
+          <div className={styles.containerActions}>
+            <BaseButton type="submit" text={t('common.save')} />
+            <BaseButton onClick={goToDashboard} text={t('common.cancel')} />
+          </div>
         </motion.div>
       </form>
     </div>

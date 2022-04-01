@@ -1,15 +1,16 @@
-import { FC, ChangeEvent } from 'react';
+import { FC, ChangeEvent, MouseEventHandler, useCallback } from 'react';
 import { getColor } from '../../../utils/getColor';
 import BaseText from '../BaseText';
 import styles from './BaseRadioButton.module.scss';
 
 interface Props {
+  value?: any;
   text?: string;
-  value?: string;
   inputName?: string;
   isChecked: boolean;
   errorMessage?: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  setFieldValue?: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
 const BaseRadioButton: FC<Props> = ({
@@ -19,7 +20,14 @@ const BaseRadioButton: FC<Props> = ({
   isChecked,
   handleChange,
   errorMessage,
+  setFieldValue,
 }) => {
+  const handleChangeCallback = useCallback((event) => {
+    if (handleChange) {
+      handleChange(event);
+    }
+  }, []);
+
   return (
     <label className={styles.container}>
       <input
@@ -27,12 +35,13 @@ const BaseRadioButton: FC<Props> = ({
         value={value}
         name={inputName}
         checked={isChecked}
-        onChange={handleChange}
+        onChange={handleChangeCallback}
       />
       <BaseText
         bold
         text={text}
         marginLeft={5}
+        onClick={setFieldValue}
         color={errorMessage && getColor('--strong-red')}
       />
     </label>

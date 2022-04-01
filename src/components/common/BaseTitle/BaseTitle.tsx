@@ -3,8 +3,9 @@ import c from 'classnames';
 import styles from './BaseTitle.module.scss';
 
 interface Props {
-  text?: string;
+  text: string;
   testId?: string;
+  color?: string;
   center?: boolean;
   fontSize?: number;
   pointer?: boolean;
@@ -18,6 +19,7 @@ interface Props {
 
 const BaseTitle: FC<Props> = ({
   text,
+  color,
   testId,
   center,
   pointer,
@@ -33,7 +35,7 @@ const BaseTitle: FC<Props> = ({
     <div
       onClick={() => onClick()}
       data-testid={`title-${testId}`}
-      style={{ fontSize, marginTop, marginLeft, marginRight, marginBottom }}
+      style={{ color, fontSize, marginTop, marginLeft, marginRight, marginBottom }}
       className={c(
         styles.title,
         center && styles.center,

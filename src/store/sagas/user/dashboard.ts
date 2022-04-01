@@ -10,13 +10,13 @@ import {
   filterDashboardPetsStart,
   filterDashboardPetsSuccess,
   filterDashboardPetsFailure,
-} from '../slices/dashboard';
+} from '../../slices/user/dashboard';
 
 // Api
 import {
   dashboard as callServiceDashboard,
   filterDashboardPets as callServiceFilterDashboradPets,
-} from '../api/dashboard';
+} from '../../api/user/dashboard';
 
 export function* dashboardWorker(data: {
   payload: {

@@ -1,3 +1,3 @@
 export const getColor = (color: string): string => {
-  return getComputedStyle(document.documentElement).getPropertyValue(color);
+  return window.getComputedStyle(document.documentElement).getPropertyValue(color);
 };

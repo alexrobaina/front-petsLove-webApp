@@ -23,6 +23,17 @@
 
 .containerActions {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  justify-content: center;
+  gap: 20px;
+  background-color: var(--white);
+}
+
+.containerButtonMedicalModal {
+  display: flex;
+  justify-content: flex-end;
 }
