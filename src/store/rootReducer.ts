@@ -8,6 +8,7 @@ import resetPasswordReducer from './slices/auth/resetPassword';
 import dashboardReducer from './slices/user/dashboard';
 import createPetReducer from './slices/pet/createPet';
 import getUsersTypeRoleReducer from './slices/user/getUsersTypeRole';
+import getPetReducer from './slices/pet/getPet';
 
 export default combineReducers({
   login: loginReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   forgotPassword: forgotPasswordReducer,
   createPet: createPetReducer,
   getUsersTypeRole: getUsersTypeRoleReducer,
+  getPet: getPetReducer,
 });

@@ -3,12 +3,14 @@ import ForgotPassword from '../views/ForgotPassword';
 import ResetPassword from '../views/ResetPassword/ResetPassword';
 import SignUp from '../views/SignUp';
 import ProfilePet from '../views/ProfilePet';
+import EditPet from '../views/EditPet';
 import {
+  SIGN_UP,
+  EDIT_PET,
   CREATE_PET,
-  FORGOT_PASSWORD,
   PROFILE_PET,
   RESET_PASSWORD,
-  SIGN_UP,
+  FORGOT_PASSWORD,
 } from './routes/routes';
 
 // Components
@@ -18,6 +20,7 @@ const navigation = [
   { path: RESET_PASSWORD, component: ResetPassword },
   { path: CREATE_PET, component: CreatePet },
   { path: PROFILE_PET, component: ProfilePet },
+  { path: EDIT_PET, component: EditPet },
 ];
 
 export default navigation;

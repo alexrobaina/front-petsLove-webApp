@@ -21,6 +21,7 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
   testId,
   values,
   errors,
+  titlePage,
   submitForm,
   handleChange,
   setFieldValue,
@@ -95,15 +96,17 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
 
   const handleDelete = useCallback(
     (indexNote: number): void => {
-      values.medicalNotes.splice(indexNote, 1);
-      setFieldValue('medicalNotes', values.medicalNotes);
+      if (values?.medicalNotes) {
+        values.medicalNotes.splice(indexNote, 1);
+        setFieldValue('medicalNotes', values.medicalNotes);
+      }
     },
-    [values.medicalNotes],
+    [values?.medicalNotes],
   );
 
   useEffect(() => {
     setCanAddMedicalNote(validateMedicalNote());
-  }, [setCanAddMedicalNote, validateMedicalNote, values.titleMedicalNote]);
+  }, [setCanAddMedicalNote, validateMedicalNote, values]);
 
   return (
     <div data-testid={`form-container-${testId}`} className={styles.container}>
@@ -117,11 +120,10 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
         >
           <BaseTitle
             center
-            color="#43455"
             fontSize={50}
             marginTop={40}
             marginBottom={60}
-            text={t('createPet.createPet')}
+            text={t(titlePage)}
           />
           <InputUploadImage setFieldValue={setFieldValue} marginBottom={20} />
           <BaseRadioButton

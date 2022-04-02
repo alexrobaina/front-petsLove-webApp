@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FaRegEye } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import BaseButton from '../../../../components/common/BaseButton';
 import BaseImage from '../../../../components/common/BaseImage';
 import BaseText from '../../../../components/common/BaseText';
@@ -21,8 +22,8 @@ const CardPet: FC<Props> = ({
   id,
   name,
   gender,
-  adopted,
   images,
+  adopted,
   handleViewProfile,
 }: any) => {
   const { t } = useTranslate();
@@ -40,10 +41,12 @@ const CardPet: FC<Props> = ({
       />
       <div className={styles.cardInfo}>
         <div className={styles.containerActions}>
-          <BaseButton icon={<AiOutlineEdit size={20} />} />
+          <Link to={`edit-pet/${id}`}>
+            <BaseButton icon={<AiOutlineEdit size={20} />} />
+          </Link>
           <BaseButton
-            onClick={() => handleViewProfile(id)}
             icon={<FaRegEye size={20} />}
+            onClick={() => handleViewProfile(id)}
           />
         </div>
         <div className={styles.containerInfo}>

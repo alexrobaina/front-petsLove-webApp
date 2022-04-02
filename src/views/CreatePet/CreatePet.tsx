@@ -9,8 +9,7 @@ import { validationCreatePet } from './helpers/validationInputSchema';
 import { DASHBOARD } from '../../navigation/routes/routes';
 import unicornAvatar from '../../assets/images/unicorn-avatar.jpg';
 import Layout from '../../components/common/Layout';
-import { TValues } from './types';
-import { calculateAge } from '../../utils/calculateAge';
+import { ICreatePet, TValues } from './types';
 import { listUsersTypeRole } from '../../store/slices/user/getUsersTypeRole';
 import { selectDataFormatted } from '../../utils/selectDataFormatted';
 import BaseLoading from '../../components/common/BaseLoading';
@@ -20,17 +19,22 @@ import BaseButton from '../../components/common/BaseButton';
 import BaseImage from '../../components/common/BaseImage';
 import styles from './CreatePet.module.scss';
 import { useTranslate } from '../../hooks/useTranslate';
+import { getPet } from '../../store/slices/pet/getPet';
 
-const CreatePet: FC = () => {
+const CreatePet: FC<ICreatePet> = ({ petId }) => {
+  const [titlePage, setTitlePage] = useState('createPet.createPet');
+  const [formState, setFormState] = useState(FORM_STATE);
   const dispatch = useDispatch();
   const history = useHistory();
   const { t } = useTranslate();
   const [usersAdopter, setUsersAdopter] = useState([{ label: '', value: '' }]);
   const [usersVet, setUsersVet] = useState([{ label: '', value: '' }]);
-  const { error, isLoading, success } = useSelector((state: any) => state.createPet);
   const user: any = JSON.parse(localStorage.getItem('user') || '');
   const [userCreator, setUserCreator] = useState('');
+
+  const { error, isLoading, success } = useSelector((state: any) => state.createPet);
   const { data } = useSelector((state: any) => state.getUsersTypeRole.listUsersTypeRole);
+  const petSelected = useSelector((state: any) => state.getPet);
 
   useEffect(() => {
     const usersAdopterRole = data[0];
@@ -58,13 +62,30 @@ const CreatePet: FC = () => {
     history.push(DASHBOARD);
   };
 
+  useEffect(() => {
+    if (error) dispatch(cleanErrorsAction());
+
+    if (petId) {
+      setTitlePage('editPet.editPet');
+      dispatch(getPet({ id: petId }));
+    }
+
+    dispatch(listUsersTypeRole({ role: ['userAdopterRole', 'userVetRole'] }));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (petSelected.data?.petDB) {
+      setFormState(petSelected.data.petDB);
+    }
+  }, [petSelected.data]);
+
   const formik = useFormik({
-    initialValues: FORM_STATE,
+    initialValues: formState,
     validationSchema: validationCreatePet,
     onSubmit: (values: TValues) => {
       const newPet = {
         userCreator,
-        bucket: 'pets',
+        age: values.age,
         name: values.name,
         city: values.city,
         color: values.color,
@@ -76,7 +97,6 @@ const CreatePet: FC = () => {
         adopted: values.adopted,
         category: values.category,
         location: values.location,
-        age: calculateAge(values.age),
         textAddress: values.textAddress,
         description: values.description,
         userAdopted: values.userAdopted,
@@ -86,13 +106,15 @@ const CreatePet: FC = () => {
     },
   });
 
+  const { values, handleChange, setFieldValue, handleSubmit, errors }: any = formik;
+
   useEffect(() => {
-    if (error) dispatch(cleanErrorsAction());
-
-    dispatch(listUsersTypeRole({ role: ['userAdopterRole', 'userVetRole'] }));
-  }, [dispatch]);
-
-  const { values, handleChange, setFieldValue, handleSubmit, errors } = formik;
+    if (petSelected.data?.petDB) {
+      Object.entries(petSelected.data.petDB).forEach(([key, value]) => {
+        values[key] = value;
+      });
+    }
+  }, [petSelected.data]);
 
   if (error) {
     return (
@@ -124,7 +146,7 @@ const CreatePet: FC = () => {
     );
   }
 
-  if (isLoading) {
+  if (isLoading || petSelected.isLoading) {
     return <BaseLoading testId="create-pet" center marginTop={100} />;
   }
 
@@ -133,6 +155,7 @@ const CreatePet: FC = () => {
       <CreatePetForm
         values={values}
         errors={errors}
+        titlePage={titlePage}
         testId="create-pet-form"
         submitForm={handleSubmit}
         handleChange={handleChange}

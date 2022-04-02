@@ -1,6 +1,7 @@
 export const LOGIN = '/';
 export const SIGN_UP = '/sign-up';
 export const DASHBOARD = '/dashboard';
+export const EDIT_PET = '/edit-pet/:id';
 export const CREATE_PET = '/create-pet';
 export const PROFILE_PET = '/profile-pet';
 export const EDIT_PROFILE = '/edit-profile';
