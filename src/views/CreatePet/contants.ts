@@ -9,6 +9,7 @@ export const FORM_STATE = {
   images: [],
   country: '',
   category: '',
+  newImages: [],
   adopted: false,
   textAddress: '',
   description: '',

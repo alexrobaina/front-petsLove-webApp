@@ -9,7 +9,7 @@ const ActionsButtons: FC = () => {
   const { t } = useTranslate();
   const history = useHistory();
 
-  const createPet = () => history.push(CREATE_PET);
+  const createPet = () => window.location.replace(CREATE_PET);
   const editProfile = () => history.push(EDIT_PROFILE);
 
   return (

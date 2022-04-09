@@ -1,13 +1,13 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineReportProblem } from 'react-icons/md';
+import { GrStatusGood } from 'react-icons/gr';
 import { useFormik } from 'formik';
 import CreatePetForm from './components/CreatePetForm';
 import { cleanErrorsAction, createPet } from '../../store/slices/pet/createPet';
 import { validationCreatePet } from './helpers/validationInputSchema';
 import { DASHBOARD } from '../../navigation/routes/routes';
-import unicornAvatar from '../../assets/images/unicorn-avatar.jpg';
 import Layout from '../../components/common/Layout';
 import { ICreatePet, TValues } from './types';
 import { listUsersTypeRole } from '../../store/slices/user/getUsersTypeRole';
@@ -16,14 +16,18 @@ import BaseLoading from '../../components/common/BaseLoading';
 import { FORM_STATE } from './contants';
 import BaseDynamicMessage from '../../components/common/BaseDynamicMessage';
 import BaseButton from '../../components/common/BaseButton';
-import BaseImage from '../../components/common/BaseImage';
 import styles from './CreatePet.module.scss';
 import { useTranslate } from '../../hooks/useTranslate';
-import { getPet } from '../../store/slices/pet/getPet';
+import {
+  getPet,
+  cleanErrorsAction as cleanErrorsGetPet,
+} from '../../store/slices/pet/getPet';
+import { updatePet, cleanErrorsUpdateAction } from '../../store/slices/pet/updatePet';
 
-const CreatePet: FC<ICreatePet> = ({ petId }) => {
+const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
   const [titlePage, setTitlePage] = useState('createPet.createPet');
-  const [formState, setFormState] = useState(FORM_STATE);
+  const [imagesToDelete] = useState<any>([]);
+  const [oldImages, setOldImages] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const { t } = useTranslate();
@@ -33,6 +37,7 @@ const CreatePet: FC<ICreatePet> = ({ petId }) => {
   const [userCreator, setUserCreator] = useState('');
 
   const { error, isLoading, success } = useSelector((state: any) => state.createPet);
+  const updatePetSlice = useSelector((state: any) => state.updatePet);
   const { data } = useSelector((state: any) => state.getUsersTypeRole.listUsersTypeRole);
   const petSelected = useSelector((state: any) => state.getPet);
 
@@ -53,9 +58,11 @@ const CreatePet: FC<ICreatePet> = ({ petId }) => {
     setUserCreator(user._id);
   }, [setUserCreator, user]);
 
-  const resetApiErrors = () => {
+  const resetApiErrors = useCallback(() => {
     dispatch(cleanErrorsAction());
-  };
+    dispatch(cleanErrorsUpdateAction());
+    dispatch(cleanErrorsGetPet());
+  }, [dispatch]);
 
   const goToDashboard = () => {
     resetApiErrors();
@@ -63,29 +70,24 @@ const CreatePet: FC<ICreatePet> = ({ petId }) => {
   };
 
   useEffect(() => {
-    if (error) dispatch(cleanErrorsAction());
+    dispatch(listUsersTypeRole({ role: ['userAdopterRole', 'userVetRole'] }));
+    resetApiErrors();
 
     if (petId) {
       setTitlePage('editPet.editPet');
       dispatch(getPet({ id: petId }));
     }
-
-    dispatch(listUsersTypeRole({ role: ['userAdopterRole', 'userVetRole'] }));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (petSelected.data?.petDB) {
-      setFormState(petSelected.data.petDB);
-    }
-  }, [petSelected.data]);
-
   const formik = useFormik({
-    initialValues: formState,
+    initialValues: FORM_STATE,
     validationSchema: validationCreatePet,
     onSubmit: (values: TValues) => {
       const newPet = {
+        _id: '',
         userCreator,
         age: values.age,
+        imageDeleted: [],
         name: values.name,
         city: values.city,
         color: values.color,
@@ -97,26 +99,52 @@ const CreatePet: FC<ICreatePet> = ({ petId }) => {
         adopted: values.adopted,
         category: values.category,
         location: values.location,
+        newImages: values.newImages,
         textAddress: values.textAddress,
         description: values.description,
         userAdopted: values.userAdopted,
         medicalNotes: values.medicalNotes,
       };
+      if (petId) {
+        newPet.imageDeleted = imagesToDelete;
+        newPet._id = petId;
+        dispatch(updatePet(newPet));
+        return;
+      }
       dispatch(createPet(newPet));
     },
   });
 
   const { values, handleChange, setFieldValue, handleSubmit, errors }: any = formik;
 
+  const handleDeleteImages = useCallback((image: string, oldImagesSelected: any) => {
+    const imagesDeleted = oldImagesSelected.filter((img: any) => {
+      return image !== img;
+    });
+    imagesToDelete.push(image);
+    setOldImages(imagesDeleted);
+  }, []);
+
   useEffect(() => {
-    if (petSelected.data?.petDB) {
-      Object.entries(petSelected.data.petDB).forEach(([key, value]) => {
-        values[key] = value;
-      });
+    if (petId) {
+      if (petSelected.data?.petDB) {
+        Object.entries(petSelected.data.petDB).forEach(([key, value]: any) => {
+          if (key === 'images') {
+            setOldImages(value);
+          }
+          values[key] = value;
+        });
+      }
     }
   }, [petSelected.data]);
 
-  if (error) {
+  useEffect(() => {
+    if (petId && updatePetSlice.success) {
+      dispatch(getPet({ id: petId }));
+    }
+  }, [updatePetSlice.success]);
+
+  if (error || updatePetSlice.error) {
     return (
       <BaseDynamicMessage
         testId="error-message-create-pet"
@@ -138,7 +166,11 @@ const CreatePet: FC<ICreatePet> = ({ petId }) => {
       <BaseDynamicMessage
         title={t('createPetSuccess')}
         testId="success-message-create-pet"
-        image={<BaseImage src={unicornAvatar} testId="success-created-message" />}
+        image={
+          <div className={styles.imageError}>
+            <GrStatusGood color="#64dd17" size={150} />
+          </div>
+        }
         textActionButton={
           <BaseButton onClick={goToDashboard} text={t('createPet.goToDashboard')} />
         }
@@ -146,7 +178,7 @@ const CreatePet: FC<ICreatePet> = ({ petId }) => {
     );
   }
 
-  if (isLoading || petSelected.isLoading) {
+  if (isLoading || updatePetSlice.isLoading) {
     return <BaseLoading testId="create-pet" center marginTop={100} />;
   }
 
@@ -155,6 +187,7 @@ const CreatePet: FC<ICreatePet> = ({ petId }) => {
       <CreatePetForm
         values={values}
         errors={errors}
+        oldImages={oldImages}
         titlePage={titlePage}
         testId="create-pet-form"
         submitForm={handleSubmit}
@@ -163,6 +196,7 @@ const CreatePet: FC<ICreatePet> = ({ petId }) => {
         setFieldValue={setFieldValue}
         goToDashboard={goToDashboard}
         usersAdoptedEmailList={usersAdopter}
+        handleDeleteImages={handleDeleteImages}
       />
     </Layout>
   );

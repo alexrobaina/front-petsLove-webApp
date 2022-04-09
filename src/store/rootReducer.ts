@@ -9,6 +9,7 @@ import dashboardReducer from './slices/user/dashboard';
 import createPetReducer from './slices/pet/createPet';
 import getUsersTypeRoleReducer from './slices/user/getUsersTypeRole';
 import getPetReducer from './slices/pet/getPet';
+import updatePetReducer from './slices/pet/updatePet';
 
 export default combineReducers({
   login: loginReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
   createPet: createPetReducer,
   getUsersTypeRole: getUsersTypeRoleReducer,
   getPet: getPetReducer,
+  updatePet: updatePetReducer,
 });

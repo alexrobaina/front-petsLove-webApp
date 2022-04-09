@@ -7,6 +7,7 @@ export type TValues = {
   name: string;
   city: string;
   color: string;
+  newImages: any;
   gender: string;
   weight: string;
   country: string;
@@ -26,17 +27,20 @@ export type TValues = {
 };
 
 export type TCreatePetSlice = {
+  _id: string;
   images: any;
   age: string;
   name: string;
   city: string;
   color: string;
+  newImages: any;
   bucket: string;
   gender: string;
   weight: string;
   country: string;
   adopted: boolean;
   category: string;
+  imageDeleted: any;
   userVet: string | null;
   medicalNotes: any;
   description: string;
@@ -52,10 +56,12 @@ export interface ICreatePetFormProps {
   testId: string;
   submitForm: any;
   values: TValues;
+  oldImages: any[];
   titlePage: string;
   setFieldValue: any;
   usersVetEmailList: any[];
   goToDashboard: () => void;
+  handleDeleteImages: (image: string, oldImages: any) => void;
   usersAdoptedEmailList: any[];
   errors: FormikErrors<TValues>;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;

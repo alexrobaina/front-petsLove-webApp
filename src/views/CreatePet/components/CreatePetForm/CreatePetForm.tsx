@@ -21,12 +21,14 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
   testId,
   values,
   errors,
+  oldImages,
   titlePage,
   submitForm,
   handleChange,
   setFieldValue,
   goToDashboard,
   usersVetEmailList,
+  handleDeleteImages,
   usersAdoptedEmailList,
 }) => {
   const { t } = useTranslate();
@@ -125,7 +127,12 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
             marginBottom={60}
             text={t(titlePage)}
           />
-          <InputUploadImage setFieldValue={setFieldValue} marginBottom={20} />
+          <InputUploadImage
+            marginBottom={20}
+            oldImages={oldImages}
+            setFieldValue={setFieldValue}
+            handleDeleteImages={handleDeleteImages}
+          />
           <BaseRadioButton
             inputName="adopted"
             text={t('createPet.isAdopted')}

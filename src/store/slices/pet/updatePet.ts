@@ -1,6 +1,6 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
 
-const sliceName = 'getPet';
+const sliceName = 'updatePet';
 
 export const initialState = {
   data: {},
@@ -9,22 +9,22 @@ export const initialState = {
   success: false,
 };
 
-const getPetSlice = createSlice({
+const updatePetSlice = createSlice({
   name: sliceName,
   initialState,
   reducers: {
-    getPetStart(state) {
+    updatePetStart(state) {
       state.data = {};
       state.error = false;
       state.isLoading = true;
     },
-    getPetSuccess(state, { payload }) {
+    updatePetSuccess(state, { payload }) {
       state.error = false;
       state.data = payload.data;
       state.success = true;
       state.isLoading = false;
     },
-    getPetFailure(state) {
+    updatePetFailure(state) {
       state.error = true;
       state.success = false;
       state.isLoading = false;
@@ -38,12 +38,13 @@ const getPetSlice = createSlice({
   },
 });
 
-const { actions, reducer } = getPetSlice;
+const { actions, reducer } = updatePetSlice;
 
-export const { getPetStart, getPetSuccess, getPetFailure, cleanErrors } = actions;
+export const { updatePetStart, updatePetSuccess, updatePetFailure, cleanErrors } =
+  actions;
 
-export const getPet = createAction<{ id: string }>(`${sliceName}/getPet`);
+export const updatePet = createAction<any>(`${sliceName}/updatePet`);
 
-export const cleanErrorsAction = createAction(`${sliceName}/cleanErrorGetPet`);
+export const cleanErrorsUpdateAction = createAction(`${sliceName}/cleanErrorUpdate`);
 
 export default reducer;
