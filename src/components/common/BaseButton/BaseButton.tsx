@@ -19,8 +19,8 @@ interface Props {
   secundary?: boolean;
   isLoading?: boolean;
   marginBottom?: number;
-  transparent?: boolean;
   isButtonLink?: boolean;
+  transparent?: boolean;
 }
 
 const BaseButton: FC<Props> = ({
