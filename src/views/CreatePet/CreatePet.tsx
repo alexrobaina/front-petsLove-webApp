@@ -2,7 +2,7 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineReportProblem } from 'react-icons/md';
-import { GrStatusGood } from 'react-icons/gr';
+import { GrFormCheckmark } from 'react-icons/gr';
 import { useFormik } from 'formik';
 import CreatePetForm from './components/CreatePetForm';
 import { cleanErrorsAction, createPet } from '../../store/slices/pet/createPet';
@@ -111,6 +111,7 @@ const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
         dispatch(updatePet(newPet));
         return;
       }
+      console.log('newPet', newPet);
       dispatch(createPet(newPet));
     },
   });
@@ -161,14 +162,14 @@ const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
     );
   }
 
-  if (success) {
+  if (success || updatePetSlice.success) {
     return (
       <BaseDynamicMessage
-        title={t('createPetSuccess')}
         testId="success-message-create-pet"
+        title={t('common.petSuccessCreateAndSuccess')}
         image={
-          <div className={styles.imageError}>
-            <GrStatusGood color="#64dd17" size={150} />
+          <div className={styles.successIcon}>
+            <GrFormCheckmark color="#00c853" size={150} />
           </div>
         }
         textActionButton={

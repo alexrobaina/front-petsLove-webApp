@@ -26,6 +26,7 @@
   "common.adopter": "Adoptante",
   "common.email": "Correo",
   "common.phone": "Teléfono",
+  "common.petSuccessCreateAndSuccess": "Se guardó correctamente",
   "common.name": "Nombre",
   "common.vet": "Veterinario",
   "common.password": "Contraseña",

@@ -6601,6 +6601,15 @@ form-data@^3.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
+form-data@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
+  integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.8"
+    mime-types "^2.1.12"
+
 form-data@~2.3.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.3.tgz#dcce52c05f644f298c6a7ab936bd724ceffbf3a6"
@@ -8520,6 +8529,13 @@ js-sha3@^0.5.7:
   resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.5.7.tgz#0d4ffd8002d5333aabaf4a23eed2f6374c9f28e7"
   integrity sha1-DU/9gALVMzqrr0oj7tL2N0yfKOc=
 
+js-to-formdata@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/js-to-formdata/-/js-to-formdata-1.2.4.tgz#15c39956b2f88cc939efbbe4909b050bf885c5f1"
+  integrity sha512-4xBOjoyB23vSNyxr+mvJOfydtNgcMXnJcFz7J/rVrOLJ5/Pr4lUUsM2QLwBBrB3zjnMiPE9wTjBIxsIQgXZ9Hg==
+  dependencies:
+    form-data "^4.0.0"
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -9712,6 +9728,16 @@ object-keys@^1.0.12, object-keys@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
+
+object-to-form@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/object-to-form/-/object-to-form-1.0.8.tgz#40f5d0ae7c478c68af17a89411f95ce0f754083e"
+  integrity sha512-P9E0pzWD79xoummMSrNyqEd+dJTOUC5h5TZRZnZZtgSxfjYaFM2iu4j+7uyScG3bak9zuwZSvHMbHpDNkE9XtA==
+
+object-to-formdata@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/object-to-formdata/-/object-to-formdata-4.4.2.tgz#f89013f90493c58cb5f6ab9f50b7aeec30745ea6"
+  integrity sha512-fu6UDjsqIfFUu/B3GXJ2IFnNAL/YbsC1PPzqDIFXcfkhdYjTD3K4zqhyD/lZ6+KdP9O/64YIPckIOiS5ouXwLA==
 
 object-visit@^1.0.0:
   version "1.0.1"
@@ -13127,6 +13153,11 @@ to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
   integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
+
+to-formdata@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/to-formdata/-/to-formdata-1.0.2.tgz#9f3d1a9812de5421ce64b4ce16ff91e06d7f02d2"
+  integrity sha512-C/29PSoyyooaDw38IphAW/g1OlhRgG1X32agfSKmQ9vEteR5Bxk6AmKSkaMUHLFJNS2005HMAmygt/OC1EsDIw==
 
 to-object-path@^0.3.0:
   version "0.3.0"

@@ -25,6 +25,7 @@
   "common.gender": "Sexo",
   "common.adopter": "Adoptante",
   "common.email": "Correo",
+  "common.petSuccessCreateAndSuccess": "Se guardó correctamente",
   "common.phone": "Teléfono",
   "common.name": "Nombre",
   "common.vet": "Veterinario",

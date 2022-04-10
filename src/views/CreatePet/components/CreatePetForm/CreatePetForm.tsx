@@ -47,10 +47,12 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
 
   const addMedicalNote = (): void => {
     closeModalMedicalNote();
-    values.medicalNotes.push({
+    const medicalNotesCopy = Array.from(values.medicalNotes);
+    medicalNotesCopy.push({
       description: values.detailMedicalNote,
       title: values.titleMedicalNote,
     });
+    setFieldValue('medicalNotes', medicalNotesCopy);
   };
 
   const handleChangeAddress = (location: any) => {
@@ -98,9 +100,10 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
 
   const handleDelete = useCallback(
     (indexNote: number): void => {
-      if (values?.medicalNotes) {
-        values.medicalNotes.splice(indexNote, 1);
-        setFieldValue('medicalNotes', values.medicalNotes);
+      const medicalNotesCopy = Array.from(values.medicalNotes);
+      if (medicalNotesCopy) {
+        medicalNotesCopy.splice(indexNote, 1);
+        setFieldValue('medicalNotes', medicalNotesCopy);
       }
     },
     [values?.medicalNotes],
