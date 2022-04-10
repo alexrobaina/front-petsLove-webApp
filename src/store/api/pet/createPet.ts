@@ -4,24 +4,29 @@ import { BASE_URL } from '../config';
 
 export const createPet = async (data: TCreatePetSlice) => {
   let formData: any = new FormData();
-
-  if (data.images) {
+  if (data.newImages) {
     Object.entries(data).forEach(([key, value]) => {
-      if (key !== 'images') {
+      const conditionsType = ['newImages', 'medicalNotes', 'location'];
+
+      if (!conditionsType.includes(key)) {
         formData.append(key, value);
+      }
+
+      if (key === 'location') {
+        formData.append('location', JSON.stringify(data.location));
       }
     });
 
-    if (data.images.length === 1) {
-      formData.append('images', data.images[0]);
-    }
-
-    if (data?.images?.length > 1) {
-      // eslint-disable-next-line no-unused-vars
-      Object.entries(data.images).forEach(([key, value]: any) => {
-        formData.append('images', value);
+    if (data?.medicalNotes) {
+      data.medicalNotes.forEach((note: any) => {
+        formData.append('medicalNotes', JSON.stringify(note));
       });
     }
+
+    // eslint-disable-next-line no-unused-vars
+    Object.entries(data.newImages).forEach(([key, value]: any) => {
+      formData.append('newImages', value);
+    });
   } else {
     formData = data;
   }

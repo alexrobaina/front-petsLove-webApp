@@ -21,11 +21,14 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
   testId,
   values,
   errors,
+  oldImages,
+  titlePage,
   submitForm,
   handleChange,
   setFieldValue,
   goToDashboard,
   usersVetEmailList,
+  handleDeleteImages,
   usersAdoptedEmailList,
 }) => {
   const { t } = useTranslate();
@@ -44,10 +47,12 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
 
   const addMedicalNote = (): void => {
     closeModalMedicalNote();
-    values.medicalNotes.push({
+    const medicalNotesCopy = Array.from(values.medicalNotes);
+    medicalNotesCopy.push({
       description: values.detailMedicalNote,
       title: values.titleMedicalNote,
     });
+    setFieldValue('medicalNotes', medicalNotesCopy);
   };
 
   const handleChangeAddress = (location: any) => {
@@ -95,15 +100,18 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
 
   const handleDelete = useCallback(
     (indexNote: number): void => {
-      values.medicalNotes.splice(indexNote, 1);
-      setFieldValue('medicalNotes', values.medicalNotes);
+      const medicalNotesCopy = Array.from(values.medicalNotes);
+      if (medicalNotesCopy) {
+        medicalNotesCopy.splice(indexNote, 1);
+        setFieldValue('medicalNotes', medicalNotesCopy);
+      }
     },
-    [values.medicalNotes],
+    [values?.medicalNotes],
   );
 
   useEffect(() => {
     setCanAddMedicalNote(validateMedicalNote());
-  }, [setCanAddMedicalNote, validateMedicalNote, values.titleMedicalNote]);
+  }, [setCanAddMedicalNote, validateMedicalNote, values]);
 
   return (
     <div data-testid={`form-container-${testId}`} className={styles.container}>
@@ -117,13 +125,17 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
         >
           <BaseTitle
             center
-            color="#43455"
             fontSize={50}
             marginTop={40}
             marginBottom={60}
-            text={t('createPet.createPet')}
+            text={t(titlePage)}
           />
-          <InputUploadImage setFieldValue={setFieldValue} marginBottom={20} />
+          <InputUploadImage
+            marginBottom={20}
+            oldImages={oldImages}
+            setFieldValue={setFieldValue}
+            handleDeleteImages={handleDeleteImages}
+          />
           <BaseRadioButton
             inputName="adopted"
             text={t('createPet.isAdopted')}

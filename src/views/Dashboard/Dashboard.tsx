@@ -42,7 +42,7 @@ const Dashboard: FC = () => {
   };
 
   const handleViewProfile = (id: string) => {
-    window.location.replace(`${process.env.REACT_APP_NEXT_JS_APP}profile-pet/${id}`);
+    window.open(`${process.env.REACT_APP_NEXT_JS_APP}profile-pet/${id}`, '_blank');
   };
 
   useEffect(() => {

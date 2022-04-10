@@ -6,14 +6,15 @@ import { MdCancel } from 'react-icons/md';
 import styles from './inputUploadImage.module.scss';
 
 const InputUploadImage = ({
-  setFieldValue,
-  oldImage,
   marginTop,
-  marginBottom,
   inputName,
+  oldImages,
+  marginBottom,
+  setFieldValue,
+  handleDeleteImages,
 }: any) => {
-  const [previewImage, setPreviewImage] = useState<any>([]);
-  const [newPreviewsImage] = useState<any>([]);
+  const [previewImage, setPreviewImage] = useState<any>(oldImages);
+  const [newPreviewsImage, setNewPreviewsImage] = useState<any>([]);
   const fileUpload: any = useRef();
 
   const handleChangeImage = useCallback((e) => {
@@ -25,56 +26,56 @@ const InputUploadImage = ({
       preview: URL.createObjectURL(file),
       imageName: file,
     }));
-    setPreviewImage(mappedFiles);
+    setNewPreviewsImage(mappedFiles);
 
-    setFieldValue('images', e.target.files);
+    setFieldValue('newImages', e.target.files);
   }, []);
 
-  const removePreviewImage = useCallback(
+  const removeNewPreviewImage = useCallback(
     (image: any) => {
-      console.log(image);
-
-      console.log(previewImage);
-
-      const imagePreview = previewImage.filter((preview: any) => {
-        return preview.preview !== image.preview;
+      const imagePreview = newPreviewsImage.filter((preview: any) => {
+        return preview.preview !== image;
       });
-      setPreviewImage(imagePreview);
-      // this.imageService.deleteImage(image)
+      setNewPreviewsImage(imagePreview);
     },
-    [previewImage],
+    [newPreviewsImage],
   );
 
-  const removeNewPreviewImage = useCallback((image) => {
-    console.log(image);
-  }, []);
+  const removeOldImage = useCallback(
+    (image) => {
+      handleDeleteImages(image, oldImages);
+    },
+    [oldImages],
+  );
 
   const onClickFileUpload = useCallback(() => {
     fileUpload.current.click();
   }, []);
 
   useEffect(() => {
-    // if (oldImage.length > 0 && inputUploadImageStore.previewImage.length === 0) {
-    //   inputUploadImageStore.setPreviewsImage(oldImage)
-  }, [oldImage]);
+    if (oldImages) {
+      if (oldImages.length > 0 && previewImage.length === 0) {
+        setPreviewImage(oldImages);
+      }
+    }
+  }, [oldImages]);
 
   return (
     <div>
       <div className={styles.containerImagePreview}>
-        {previewImage &&
-          previewImage.map((image: any) => {
+        {oldImages &&
+          oldImages.map((image: any) => {
             return (
               <div key={image} className={styles.containerImage}>
                 <img
                   alt="pets"
                   className={styles.imagePreview}
-                  src={image.preview}
-                  // src={image ? `${AWS_STORAGE}/${PET_BUCKET}/${image}` : noImage}
+                  src={`${'https://petslove-bucket-2.s3.amazonaws.com/pets/'}${image}`}
                 />
                 <Tooltip title="deleteImage">
                   <div className={styles.middle}>
                     <div
-                      onClick={() => removePreviewImage(image)}
+                      onClick={() => removeOldImage(image)}
                       className={styles.containerIcon}
                     >
                       <MdCancel className={styles.iconImage} size={20} />
@@ -91,7 +92,7 @@ const InputUploadImage = ({
                 <img className={styles.imagePreview} src={image.preview} alt="pets" />
                 <div className={styles.middle}>
                   <div
-                    onClick={() => removeNewPreviewImage(image)}
+                    onClick={() => removeNewPreviewImage(image.preview)}
                     className={styles.containerIcon}
                   >
                     <MdCancel className={styles.iconImage} size={20} />
@@ -101,30 +102,27 @@ const InputUploadImage = ({
             );
           })}
       </div>
-      {true && (
-        <div
-          style={{ marginTop, marginBottom, width: '100%' }}
-          className={styles.colInputImage}
+      <div
+        style={{ marginTop, marginBottom, width: '100%' }}
+        className={styles.colInputImage}
+      >
+        <input
+          multiple
+          type="file"
+          name={inputName}
+          ref={fileUpload}
+          className={styles.inputFile}
+          onChange={handleChangeImage}
+          placeholder="placeholderImages"
+        />
+        <label
+          onClick={onClickFileUpload}
+          className={c(styles.textInput, styles.btnTertiary)}
         >
-          <input
-            multiple
-            type="file"
-            name={inputName}
-            ref={fileUpload}
-            className={styles.inputFile}
-            onChange={handleChangeImage}
-            placeholder="placeholderImages"
-          />
-          <label
-            onClick={onClickFileUpload}
-            className={c(styles.textInput, styles.btnTertiary)}
-          >
-            <AiOutlineCloudUpload className={styles.icon} size={18} />
-            {/* <span>{t('addFile')}</span> */}
-            <span>addFile</span>
-          </label>
-        </div>
-      )}
+          <AiOutlineCloudUpload className={styles.icon} size={18} />
+          <span>addFile</span>
+        </label>
+      </div>
     </div>
   );
 };

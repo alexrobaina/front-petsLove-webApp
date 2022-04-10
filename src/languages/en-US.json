@@ -26,6 +26,7 @@
   "common.adopter": "Adoptante",
   "common.email": "Correo",
   "common.phone": "Teléfono",
+  "common.petSuccessCreateAndSuccess": "Se guardó correctamente",
   "common.name": "Nombre",
   "common.vet": "Veterinario",
   "common.password": "Contraseña",
@@ -78,5 +79,6 @@
   "createPet.detailMedicalNoteLabel": "Descripción",
   "createPet.createMedicalNote": "Crear nota",
   "createPet.goToDashboard": "Ir al panel.",
-  "createPet.createdPetsuccess": "Mascota creada con exito."
+  "createPet.createdPetsuccess": "Mascota creada con exito.",
+  "editPet.editPet": "Editar mascota"
 }
