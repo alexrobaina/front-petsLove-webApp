@@ -111,7 +111,6 @@ const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
         dispatch(updatePet(newPet));
         return;
       }
-      console.log('newPet', newPet);
       dispatch(createPet(newPet));
     },
   });

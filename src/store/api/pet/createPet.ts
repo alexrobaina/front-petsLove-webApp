@@ -30,7 +30,6 @@ export const createPet = async (data: TCreatePetSlice) => {
   } else {
     formData = data;
   }
-  console.log(data);
 
   return axios.post(`${BASE_URL}/pet`, formData);
 };
