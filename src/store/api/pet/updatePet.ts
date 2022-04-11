@@ -12,7 +12,7 @@ export const updatePet = async (data: TCreatePetSlice) => {
     }
 
     if (key === 'location') {
-      formData.append('location', data.location);
+      formData.append('location', JSON.stringify(data.location));
     }
 
     if (key === 'imageDeleted') {

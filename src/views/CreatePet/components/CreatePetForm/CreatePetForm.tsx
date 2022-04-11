@@ -51,6 +51,7 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
     medicalNotesCopy.push({
       description: values.detailMedicalNote,
       title: values.titleMedicalNote,
+      date: new Date(),
     });
     setFieldValue('medicalNotes', medicalNotesCopy);
   };
