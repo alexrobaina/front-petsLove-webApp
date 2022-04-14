@@ -84,5 +84,7 @@
   "editPet.editPet": "Editar mascota",
   "editUser.updateUserSuccess": "Usuario actualizado correctamente",
   "editUser.textAddress": "Dirección seleccionada",
-  "editUser.userLocationPlaceHolder": "Ubicación del lugar."
+  "editUser.userLocationPlaceHolder": "Ubicación del lugar.",
+  "editUser.goToProfile": "Ver mi perfil",
+  "editUser.goToDashboard": "Ir al panel."
 }

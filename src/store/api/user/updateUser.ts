@@ -29,5 +29,5 @@ export const updateUser = async (data: TCreatePetSlice) => {
     });
   }
 
-  return axios.put(`${BASE_URL}/user?_id=${data._id}`, formData);
+  return axios.put(`${BASE_URL}/usesdfr?_id=${data._id}`, formData);
 };

@@ -1,3 +1,5 @@
+@import '../../styles/mixings.scss';
+
 .imageError {
   display: flex;
   justify-content: center;
@@ -19,4 +21,14 @@
 .successIcon {
   display: flex;
   justify-content: center;
+}
+
+.actionsMessageRequest {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+
+  @include media-breakpoint-between(xs, sm) {
+    flex-direction: column;
+  }
 }

@@ -46,9 +46,21 @@ const EditPet: FC = () => {
     requirementsToAdopt: '',
   };
 
+  const goToProfile = () => {
+    dispatch(cleanErrors());
+    window.open(
+      `${process.env.REACT_APP_NEXT_JS_APP}profile-user/${user.data?._id}`,
+      '_blank',
+    );
+  };
+
   const goToDashboard = () => {
     dispatch(cleanErrors());
     history.push(DASHBOARD);
+  };
+
+  const tryAgain = () => {
+    dispatch(cleanErrors());
   };
 
   useEffect(() => {
@@ -104,7 +116,7 @@ const EditPet: FC = () => {
     setOldImages([]);
   }, [values.newImages]);
 
-  if (updateUser.success) {
+  if (updateUser.success || updateUser.error) {
     return (
       <BaseDynamicMessage
         testId="messages-update-user"
@@ -115,7 +127,16 @@ const EditPet: FC = () => {
           </div>
         }
         textActionButton={
-          <BaseButton onClick={goToDashboard} text={t('createPet.goToDashboard')} />
+          <div className={styles.actionsMessageRequest}>
+            {updateUser.error ? (
+              <BaseButton onClick={tryAgain} text={t('common.tryAgain')} />
+            ) : (
+              <>
+                <BaseButton onClick={goToProfile} text={t('editUser.goToProfile')} />
+                <BaseButton onClick={goToDashboard} text={t('editUser.goToDashboard')} />
+              </>
+            )}
+          </div>
         }
       />
     );
