@@ -61,10 +61,10 @@ export interface ICreatePetFormProps {
   setFieldValue: any;
   usersVetEmailList: any[];
   goToDashboard: () => void;
-  handleDeleteImages: (image: string, oldImages: any) => void;
   usersAdoptedEmailList: any[];
   errors: FormikErrors<TValues>;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleDeleteImages: (image: string, oldImages: any) => void;
 }
 
 export interface ICreatePet {

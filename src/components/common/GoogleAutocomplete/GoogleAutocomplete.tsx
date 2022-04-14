@@ -6,7 +6,6 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import { useTranslate } from '../../../hooks/useTranslate';
 import BaseLabel from '../BaseLabel';
-
 import styles from './googleAutocomplete.module.scss';
 
 const GoogleAutocomplete: FC<any> = ({

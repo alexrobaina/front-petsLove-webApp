@@ -136,6 +136,7 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
             oldImages={oldImages}
             setFieldValue={setFieldValue}
             handleDeleteImages={handleDeleteImages}
+            bucketUrl={process.env.REACT_APP_AWS_IMAGE_USERS_URL_BASE || ''}
           />
           <BaseRadioButton
             inputName="adopted"

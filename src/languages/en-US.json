@@ -4,6 +4,7 @@
   "common.female": "Hembra",
   "common.adopted": "Adoptados",
   "common.adoption": "En adopcion",
+  "common.uploadPhoto": "Subir foto",
   "common.dogs": "Perros",
   "common.cats": "Gatos",
   "common.exotics": "Exóticos",
@@ -80,5 +81,8 @@
   "createPet.createMedicalNote": "Crear nota",
   "createPet.goToDashboard": "Ir al panel.",
   "createPet.createdPetsuccess": "Mascota creada con exito.",
-  "editPet.editPet": "Editar mascota"
+  "editPet.editPet": "Editar mascota",
+  "editUser.updateUserSuccess": "Usuario actualizado correctamente",
+  "editUser.textAddress": "Dirección seleccionada",
+  "editUser.userLocationPlaceHolder": "Ubicación del lugar."
 }

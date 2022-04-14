@@ -16,13 +16,13 @@ import BaseLoading from '../../components/common/BaseLoading';
 import { FORM_STATE } from './contants';
 import BaseDynamicMessage from '../../components/common/BaseDynamicMessage';
 import BaseButton from '../../components/common/BaseButton';
-import styles from './CreatePet.module.scss';
 import { useTranslate } from '../../hooks/useTranslate';
 import {
   getPet,
   cleanErrorsAction as cleanErrorsGetPet,
 } from '../../store/slices/pet/getPet';
 import { updatePet, cleanErrorsUpdateAction } from '../../store/slices/pet/updatePet';
+import styles from './CreatePet.module.scss';
 
 const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
   const [titlePage, setTitlePage] = useState('createPet.createPet');
