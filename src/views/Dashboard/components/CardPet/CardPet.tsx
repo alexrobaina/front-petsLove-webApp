@@ -27,7 +27,7 @@ const CardPet: FC<Props> = ({
   handleViewProfile,
 }: any) => {
   const { t } = useTranslate();
-  console.log(adopted);
+
   return (
     <div className={styles.card}>
       <BaseImage
