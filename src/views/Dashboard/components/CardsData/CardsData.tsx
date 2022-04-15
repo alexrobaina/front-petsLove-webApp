@@ -12,7 +12,7 @@ interface Props {
   setCategoryFilter: (filter: string) => void;
 }
 
-const Dashboard: FC<Props> = ({
+const CardsData: FC<Props> = ({
   isAdopt,
   setIsAdopt,
   categoryFilter,
@@ -29,7 +29,7 @@ const Dashboard: FC<Props> = ({
           className={c(categoryFilter === 'dog' && styles.selected, styles.cardCount)}
         >
           <BaseTitle center text={t('common.dogs')} />
-          <BaseTitle center fontSize={40} marginTop={15} text={data.dogs} />
+          <BaseTitle center fontSize={30} text={data.dogs} />
         </div>
       )}
       {data.cats !== 0 && (
@@ -38,7 +38,7 @@ const Dashboard: FC<Props> = ({
           className={c(categoryFilter === 'cat' && styles.selected, styles.cardCount)}
         >
           <BaseTitle center text={t('common.cats')} />
-          <BaseTitle center fontSize={40} marginTop={15} text={data.cats} />
+          <BaseTitle center fontSize={30} text={data.cats} />
         </div>
       )}
       {data.exotics !== 0 && (
@@ -47,7 +47,7 @@ const Dashboard: FC<Props> = ({
           className={c(categoryFilter === 'exotic' && styles.selected, styles.cardCount)}
         >
           <BaseTitle center text={t('common.exotics')} />
-          <BaseTitle center fontSize={40} marginTop={15} text={data.exotics} />
+          <BaseTitle center fontSize={30} text={data.exotics} />
         </div>
       )}
       <div
@@ -55,17 +55,17 @@ const Dashboard: FC<Props> = ({
         className={c(isAdopt === true && styles.selected, styles.cardCount)}
       >
         <BaseTitle center text={t('common.adopted')} />
-        <BaseTitle center fontSize={40} marginTop={15} text={data.adopted} />
+        <BaseTitle center fontSize={30} text={data.adopted} />
       </div>
       <div
         onClick={() => setIsAdopt(false)}
         className={c(isAdopt === false && styles.selected, styles.cardCount)}
       >
         <BaseTitle center text={t('common.adoption')} />
-        <BaseTitle center fontSize={40} marginTop={15} text={data.adoption} />
+        <BaseTitle center fontSize={30} text={data.adoption} />
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default CardsData;

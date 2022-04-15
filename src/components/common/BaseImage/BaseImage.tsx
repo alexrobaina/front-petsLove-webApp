@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import c from 'classnames';
+import noImage from '../../../assets/images/no-photo.png';
 import styles from './BaseImage.module.scss';
 
 interface Props {
@@ -38,6 +39,10 @@ const BaseImage: FC<Props> = ({
       <img
         src={src}
         alt="baseImage"
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src = noImage;
+        }}
         data-testid="image"
         style={{ width, height, objectFit }}
       />

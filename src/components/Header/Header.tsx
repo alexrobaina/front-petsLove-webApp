@@ -55,7 +55,12 @@ const Header: FC<Props> = ({
       <div className={styles.containerNavegation}>
         {/* <ThemeChange changeTheme={changeTheme} theme={theme} /> */}
         <BasicMenu handleSelectItem={setLanguage} items={ITEMS} />
-        <a className={styles.iconButton} href={`${process.env.REACT_APP_NEXT_JS_APP}`}>
+        <a
+          target="_blank"
+          rel="noreferrer"
+          className={styles.iconButton}
+          href={`${process.env.REACT_APP_NEXT_JS_APP}`}
+        >
           <BiSearchAlt size={30} />
         </a>
         {token && (

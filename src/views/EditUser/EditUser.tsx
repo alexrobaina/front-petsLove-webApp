@@ -132,8 +132,8 @@ const EditPet: FC = () => {
               <BaseButton onClick={tryAgain} text={t('common.tryAgain')} />
             ) : (
               <>
-                <BaseButton onClick={goToProfile} text={t('editUser.goToProfile')} />
-                <BaseButton onClick={goToDashboard} text={t('editUser.goToDashboard')} />
+                <BaseButton onClick={goToProfile} text={t('common.goToProfile')} />
+                <BaseButton onClick={goToDashboard} text={t('common.goToDashboard')} />
               </>
             )}
           </div>
@@ -143,7 +143,7 @@ const EditPet: FC = () => {
   }
 
   if (user.isLoading || updateUser.isLoading) {
-    return <BaseLoading testId="create-pet" center marginTop={100} />;
+    return <BaseLoading testId="edit-user" center marginTop={100} />;
   }
 
   return (
@@ -154,8 +154,8 @@ const EditPet: FC = () => {
           fontSize={50}
           marginTop={40}
           marginBottom={60}
-          text="Editar usuario"
           testId="title-edit-user"
+          text={t('editUser.title')}
         />
         <InputUploadImage
           marginBottom={20}
@@ -167,70 +167,74 @@ const EditPet: FC = () => {
           marginTop={10}
           inputName="name"
           value={values.name}
-          label="Nombre de usuario"
           handleChange={handleChange}
-          placeholder="Nombre de usuario"
+          errorMessage={t(errors.name)}
+          label={t('editUser.labelUsername')}
+          placeholder={t('editUser.placeholderUsername')}
         />
         <BaseInput
           marginTop={10}
-          label="Nombre real"
           inputName="firstname"
           value={values.firstname}
-          placeholder="Nombre real"
           handleChange={handleChange}
+          label={t('editUser.firstNameLabel')}
+          placeholder={t('editUser.firstnamePlaceholder')}
         />
         <BaseInput
           marginTop={10}
-          label="Apellido"
           inputName="lastname"
           value={values.lastname}
-          placeholder="Apellido"
           handleChange={handleChange}
+          errorMessage={t(errors.lastname)}
+          label={t('editUser.lastnameLabel')}
+          placeholder={t('editUser.lastnamePlaceholder')}
         />
         <BaseInput
           disabled
           type="text"
-          label="Email"
           marginTop={10}
           inputName="email"
-          placeholder="Email"
           marginBottom={10}
           value={values.email}
+          label={t('common.email')}
           handleChange={handleChange}
+          placeholder="email@test.com"
+          errorMessage={t(errors.email)}
         />
         <GoogleAutocomplete
           name="google"
-          value={values.textAddress}
-          label={t('createPet.petLocation')}
           handleChangeAddress={handleChangeAddress}
+          label={t('editUser.googleAutocompleteLabel')}
           handleChangeTextAddress={handleChangeTextAddress}
-          placeholder={t('editUser.userLocationPlaceHolder')}
+          placeholder={t('editUser.googleAutocompletePlaceHolder')}
           handleChangeAddressComponents={handleChangeAddressComponents}
         />
         {values.textAddress && <BaseTitle fontSize={14} text={values.textAddress} />}
         <BaseInput
           marginTop={10}
-          label="requirementsToAdopt"
           handleChange={handleChange}
           inputName="requirementsToAdopt"
           value={values.requirementsToAdopt}
-          placeholder="Requisitos para adoptar"
+          errorMessage={t(errors.requirementsToAdopt)}
+          label={t('editUser.requirementsToAdoptLabel')}
+          placeholder={t('editUser.requirementsToAdoptPlaceholder')}
         />
         <BaseInput
           marginTop={10}
           inputName="aboutUs"
-          label="Sobre nosotros"
           value={values.aboutUs}
           handleChange={handleChange}
-          placeholder="Pequeña historia o Descripcion sobre usted."
+          errorMessage={t(errors.aboutUs)}
+          label={t('editUser.aboutUsLabel')}
+          placeholder={t('editUser.aboutUsPlaceholder')}
         />
         <BaseInputPhone
           marginTop={10}
-          label="Telefono"
           inputName="phone"
           testId="edit-user"
           defaultCountry="ar"
           countryList={['ar']}
+          label={t('common.phone')}
           value={values.phone || ''}
           setFieldValue={setFieldValue}
           errorMessage={t(errors.phone)}

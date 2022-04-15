@@ -27,21 +27,18 @@ const CardPet: FC<Props> = ({
   handleViewProfile,
 }: any) => {
   const { t } = useTranslate();
-
+  console.log(adopted);
   return (
     <div className={styles.card}>
       <BaseImage
         width="100%"
         height="200px"
         objectFit="cover"
-        src={`${
-          process.env.REACT_APP_AWS_IMAGE_PETS_URL_BASE ||
-          'https://petslove-bucket-2.s3.amazonaws.com/pets/'
-        }${images[0]}`}
+        src={`${process.env.REACT_APP_AWS_IMAGE_PETS_URL_BASE}${images[0]}`}
       />
       <div className={styles.cardInfo}>
         <div className={styles.containerActions}>
-          <Link to={`edit-pet/${id}`}>
+          <Link className={styles.buttonLink} to={`edit-pet/${id}`}>
             <BaseButton icon={<AiOutlineEdit size={20} />} />
           </Link>
           <BaseButton
@@ -58,7 +55,7 @@ const CardPet: FC<Props> = ({
         </div>
         <div className={styles.containerDataDetail}>
           <BaseText marginRight={10} text={t('dashboard.sex')} />
-          <BaseText capitalize text={gender} />
+          <BaseText capitalize text={t(`common.${gender}`)} />
         </div>
       </div>
     </div>

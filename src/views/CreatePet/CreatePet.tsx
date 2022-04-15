@@ -172,7 +172,7 @@ const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
           </div>
         }
         textActionButton={
-          <BaseButton onClick={goToDashboard} text={t('createPet.goToDashboard')} />
+          <BaseButton onClick={goToDashboard} text={t('common.goToDashboard')} />
         }
       />
     );

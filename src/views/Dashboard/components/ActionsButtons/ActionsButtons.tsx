@@ -14,9 +14,9 @@ const ActionsButtons: FC = () => {
 
   return (
     <div className={styles.actionCreateNewPet}>
-      <BaseButton onClick={createPet} marginTop={50} text={t('dashboard.createPet')} />
+      <BaseButton onClick={createPet} marginBottom={40} text={t('dashboard.createPet')} />
       <BaseButton
-        marginTop={50}
+        marginBottom={40}
         onClick={editProfile}
         text={t('dashboard.editProfile')}
       />

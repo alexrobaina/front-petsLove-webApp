@@ -136,7 +136,7 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
             oldImages={oldImages}
             setFieldValue={setFieldValue}
             handleDeleteImages={handleDeleteImages}
-            bucketUrl={process.env.REACT_APP_AWS_IMAGE_USERS_URL_BASE || ''}
+            bucketUrl={process.env.REACT_APP_AWS_IMAGE_PETS_URL_BASE || ''}
           />
           <BaseRadioButton
             inputName="adopted"
@@ -193,12 +193,14 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
           />
           <GoogleAutocomplete
             name="google"
+            value={values.textAddress}
             label={t('createPet.petLocation')}
             handleChangeAddress={handleChangeAddress}
             handleChangeTextAddress={handleChangeTextAddress}
             placeholder={t('createPet.petLocationPlaceHolder')}
             handleChangeAddressComponents={handleChangeAddressComponents}
           />
+          {values.textAddress && <BaseTitle fontSize={14} text={values.textAddress} />}
           <BaseSelectInput
             marginTop={10}
             testId="category"
