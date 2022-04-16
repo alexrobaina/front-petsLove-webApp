@@ -5,8 +5,8 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { useTranslate } from '../../../hooks/useTranslate';
-import BaseLabel from '../BaseLabel';
 import styles from './googleAutocomplete.module.scss';
+import BaseLabel from '../BaseLabel';
 
 const GoogleAutocomplete: FC<any> = ({
   name = '',

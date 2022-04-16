@@ -191,6 +191,7 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
             errorMessage={t(errors.weight)}
             placeholder={t('createPet.weightPetPlaceholder')}
           />
+          {/* @ts-ignore */}
           <GoogleAutocomplete
             name="google"
             value={values.textAddress}

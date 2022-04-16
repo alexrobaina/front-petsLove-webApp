@@ -201,6 +201,7 @@ const EditPet: FC = () => {
           placeholder="email@test.com"
           errorMessage={t(errors.email)}
         />
+        {/* @ts-ignore */}
         <GoogleAutocomplete
           name="google"
           handleChangeAddress={handleChangeAddress}
