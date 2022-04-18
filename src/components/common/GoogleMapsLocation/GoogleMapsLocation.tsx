@@ -24,11 +24,13 @@ const GoogleMapsLocation: FC<Props> = ({ position }) => {
   return (
     <>
       {isLoaded && (
+        // @ts-ignore
         <GoogleMap
           zoom={10}
           center={position || POSITION_DEFAULT}
           mapContainerClassName={styles.imageMap}
         >
+          {/* @ts-ignore */}
           <Marker position={POSITION_DEFAULT} />
         </GoogleMap>
       )}

@@ -4,8 +4,8 @@ import styles from './BaseLabel.module.scss';
 
 interface Props {
   text: string;
-  marginBottom?: number;
   bold?: boolean;
+  marginBottom?: number;
 }
 
 const BaseLabel: FC<Props> = ({ text, bold, marginBottom = 0 }) => {

@@ -31,7 +31,7 @@
 }
 
 .containerPets {
-  margin-top: 50px;
+  margin-top: 20px;
   display: grid;
   justify-content: space-between;
   grid-template-columns: 1fr 1fr 1fr;
@@ -60,7 +60,7 @@
 .containerFilters {
   display: flex;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
   gap: 30px;
   justify-content: flex-start;
 }

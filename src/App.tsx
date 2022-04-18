@@ -1,4 +1,3 @@
-import { ComponentType } from 'react';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import navigation from './navigation/navigation';
@@ -22,7 +21,7 @@ function App() {
           <WrapperConfig>
             <>
               <Route exact path={LOGIN} component={Login} />
-              {navigation.map((nav: { path: string; component: ComponentType }) => {
+              {navigation.map((nav: { path: string; component: any }) => {
                 return <Route key={nav.path} path={nav.path} component={nav.component} />;
               })}
               <Route path={PAGE_NOT_FOUND} component={PageNotFound} />

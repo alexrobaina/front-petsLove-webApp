@@ -8,6 +8,8 @@ import resetPasswordSagas from './auth/resetPassword';
 import createPetSagas from './pet/createPet';
 import getPetSagas from './pet/getPet';
 import updatePetSagas from './pet/updatePet';
+import getUserSagas from './user/getUser';
+import updateUserSagas from './user/updateUser';
 
 export default function* rootSaga() {
   yield all([
@@ -20,5 +22,7 @@ export default function* rootSaga() {
     listUsersTypeRoleSagas(),
     getPetSagas(),
     updatePetSagas(),
+    getUserSagas(),
+    updateUserSagas(),
   ]);
 }

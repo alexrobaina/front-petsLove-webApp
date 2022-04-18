@@ -24,6 +24,7 @@ const PrivateRoute: FC<Props> = ({
     ) : (
       <Redirect exact to={{ pathname: redirectPath }} />
     );
+  // @ts-ignore
   return <Route path={path} {...rest} render={routeComponent} />;
 };
 

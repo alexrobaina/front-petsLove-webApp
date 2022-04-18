@@ -68,13 +68,13 @@ const Dashboard: FC = () => {
   return (
     <div className={styles.container}>
       <BaseTitle marginBottom={50} fontSize={40} text={t('common.dashboardTitle')} />
+      <ActionsButtons />
       <CardsData
         isAdopt={isAdopt}
         setIsAdopt={setIsAdopt}
         categoryFilter={category}
         setCategoryFilter={setCategoryFilter}
       />
-      <ActionsButtons />
       <BaseInput
         marginTop={20}
         inputName="search"

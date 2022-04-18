@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/runtime": "^7.17.9",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.2.8",
     "@react-google-maps/api": "^2.7.0",
@@ -93,7 +95,6 @@
   "lint-staged": {
     "./src/**/*.{scss,ts,tsx}": [
       "yarn prettier",
-      "yarn test --watchAll=false --findRelatedTests --bail",
       "git add ."
     ]
   },

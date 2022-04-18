@@ -1,18 +1,31 @@
-import { useCallback, useRef, useEffect, useState } from 'react';
+import { useCallback, useRef, useEffect, useState, FC } from 'react';
 import c from 'classnames';
 import { Tooltip } from '@mui/material';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { MdCancel } from 'react-icons/md';
 import styles from './inputUploadImage.module.scss';
+import { useTranslate } from '../../../hooks/useTranslate';
 
-const InputUploadImage = ({
+interface Props {
+  oldImages: any;
+  bucketUrl: string;
+  marginTop?: number;
+  inputName?: string;
+  setFieldValue: any;
+  marginBottom?: number;
+  handleDeleteImages?: (image: string, oldImages: any) => void;
+}
+
+const InputUploadImage: FC<Props> = ({
+  bucketUrl,
   marginTop,
   inputName,
   oldImages,
   marginBottom,
   setFieldValue,
-  handleDeleteImages,
-}: any) => {
+  handleDeleteImages = null,
+}) => {
+  const { t } = useTranslate();
   const [previewImage, setPreviewImage] = useState<any>(oldImages);
   const [newPreviewsImage, setNewPreviewsImage] = useState<any>([]);
   const fileUpload: any = useRef();
@@ -43,7 +56,7 @@ const InputUploadImage = ({
 
   const removeOldImage = useCallback(
     (image) => {
-      handleDeleteImages(image, oldImages);
+      return handleDeleteImages !== null && handleDeleteImages(image, oldImages);
     },
     [oldImages],
   );
@@ -68,20 +81,22 @@ const InputUploadImage = ({
             return (
               <div key={image} className={styles.containerImage}>
                 <img
-                  alt="pets"
+                  alt="pets-love"
+                  src={`${bucketUrl}${image}`}
                   className={styles.imagePreview}
-                  src={`${'https://petslove-bucket-2.s3.amazonaws.com/pets/'}${image}`}
                 />
-                <Tooltip title="deleteImage">
-                  <div className={styles.middle}>
-                    <div
-                      onClick={() => removeOldImage(image)}
-                      className={styles.containerIcon}
-                    >
-                      <MdCancel className={styles.iconImage} size={20} />
+                {handleDeleteImages && (
+                  <Tooltip title="deleteImage">
+                    <div className={styles.middle}>
+                      <div
+                        onClick={() => removeOldImage(image)}
+                        className={styles.containerIcon}
+                      >
+                        <MdCancel className={styles.iconImage} size={20} />
+                      </div>
                     </div>
-                  </div>
-                </Tooltip>
+                  </Tooltip>
+                )}
               </div>
             );
           })}
@@ -89,7 +104,11 @@ const InputUploadImage = ({
           newPreviewsImage.map((image: any) => {
             return (
               <div key={image.preview} className={styles.containerImage}>
-                <img className={styles.imagePreview} src={image.preview} alt="pets" />
+                <img
+                  alt="pets-love"
+                  src={image.preview}
+                  className={styles.imagePreview}
+                />
                 <div className={styles.middle}>
                   <div
                     onClick={() => removeNewPreviewImage(image.preview)}
@@ -120,7 +139,7 @@ const InputUploadImage = ({
           className={c(styles.textInput, styles.btnTertiary)}
         >
           <AiOutlineCloudUpload className={styles.icon} size={18} />
-          <span>addFile</span>
+          <span>{t('common.uploadPhoto')}</span>
         </label>
       </div>
     </div>

@@ -15,7 +15,7 @@ const Providers = ({ children, store }: any) => {
 
 const customRender = (ui: any, options: any) => {
   const { initialState, route } = options || {};
-  const history = createMemoryHistory({ initialEntries: [route] });
+  const history: any = createMemoryHistory({ initialEntries: [route] });
   const store = mockStore(initialState || {});
   store.dispatch = jest.fn(store.dispatch);
 
