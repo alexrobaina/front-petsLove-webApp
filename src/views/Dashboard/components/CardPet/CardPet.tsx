@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FaRegEye } from 'react-icons/fa';
+import { MdDeleteForever } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import BaseButton from '../../../../components/common/BaseButton';
 import BaseImage from '../../../../components/common/BaseImage';
@@ -15,7 +16,9 @@ interface Props {
   gender: string;
   images: string;
   adopted: boolean;
+  handleDeletePet: Function;
   handleViewProfile: Function;
+  canBeChangeDeletePet: boolean;
 }
 
 const CardPet: FC<Props> = ({
@@ -24,7 +27,9 @@ const CardPet: FC<Props> = ({
   gender,
   images,
   adopted,
+  handleDeletePet,
   handleViewProfile,
+  canBeChangeDeletePet,
 }: any) => {
   const { t } = useTranslate();
 
@@ -45,6 +50,13 @@ const CardPet: FC<Props> = ({
             icon={<FaRegEye size={20} />}
             onClick={() => handleViewProfile(id)}
           />
+          {canBeChangeDeletePet && (
+            <BaseButton
+              backgroundColor="#c62828"
+              onClick={() => handleDeletePet(id)}
+              icon={<MdDeleteForever color="#ffffff" size={23} />}
+            />
+          )}
         </div>
         <div className={styles.containerInfo}>
           <BaseTitle capitalize text={name} />

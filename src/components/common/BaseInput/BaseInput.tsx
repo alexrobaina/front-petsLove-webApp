@@ -20,6 +20,7 @@ interface Props {
   disabled?: boolean;
   placeholder?: string;
   marginBottom?: number;
+  autoComplete?: string;
   onPaste?: (e: any) => void;
   onBlur?: (value: string) => void;
   errorMessage?: string | undefined;
@@ -44,6 +45,7 @@ const BaseInput: FC<Props> = ({
   marginBottom = 0,
   placeholder = '',
   errorMessage = '',
+  autoComplete = '',
   onKeyPress = null,
   onPaste = () => {},
   handleChange = () => {},
@@ -89,6 +91,7 @@ const BaseInput: FC<Props> = ({
         onBlur={() => onBlur}
         onChange={handleChange}
         placeholder={placeholder}
+        autoComplete={autoComplete}
         onKeyPress={() => onKeyPress}
         type={type === 'password' ? viewPassword : type}
         data-testid={`baseInput-${testId}-${inputName}-input`}

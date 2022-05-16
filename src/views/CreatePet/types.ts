@@ -65,6 +65,7 @@ export interface ICreatePetFormProps {
   errors: FormikErrors<TValues>;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleDeleteImages: (image: string, oldImages: any) => void;
+  canBeChangeAdoptedStatus: () => boolean;
 }
 
 export interface ICreatePet {

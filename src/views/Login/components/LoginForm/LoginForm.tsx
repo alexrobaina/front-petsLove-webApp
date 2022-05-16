@@ -69,6 +69,7 @@ const LoginForm: FC<Props> = ({
             marginTop={10}
             testId={testId}
             inputName="email"
+            autoComplete="off"
             value={values.email}
             label={t('common.email')}
             handleChange={handleChange}

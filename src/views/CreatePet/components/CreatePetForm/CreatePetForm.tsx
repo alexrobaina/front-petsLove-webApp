@@ -9,7 +9,6 @@ import { useTranslate } from '../../../../hooks/useTranslate';
 import BaseTextarea from '../../../../components/common/BaseTextarea';
 import BaseSelectInput from '../../../../components/common/BaseSelectInput';
 import GoogleAutocomplete from '../../../../components/common/GoogleAutocomplete';
-import BaseRadioButton from '../../../../components/common/BaseRadioButton';
 import PopUp from '../../../../components/common/PopUp';
 import MedicalNotesItem from '../MedicalNotesItems';
 import { ICreatePetFormProps } from '../../types';
@@ -30,6 +29,7 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
   usersVetEmailList,
   handleDeleteImages,
   usersAdoptedEmailList,
+  canBeChangeAdoptedStatus,
 }) => {
   const { t } = useTranslate();
   const [modalIsOpen, setModal] = useState(false);
@@ -138,14 +138,6 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
             handleDeleteImages={handleDeleteImages}
             bucketUrl={process.env.REACT_APP_AWS_IMAGE_PETS_URL_BASE || ''}
           />
-          <BaseRadioButton
-            inputName="adopted"
-            text={t('createPet.isAdopted')}
-            isChecked={values.adopted === true}
-            setFieldValue={() => {
-              setFieldValue('adopted', !values.adopted);
-            }}
-          />
           <BaseInput
             type="text"
             marginTop={10}
@@ -227,16 +219,18 @@ const CreatePetForm: FC<ICreatePetFormProps> = ({
             ]}
             errorMessage={t(errors.gender)}
           />
-          <BaseSelectInput
-            marginTop={10}
-            testId="user-adopted"
-            inputName="userAdopted"
-            setFieldValue={setFieldValue}
-            options={usersAdoptedEmailList}
-            value={values.userAdopted || ''}
-            label={t('createPet.userAdopterEmail')}
-            placeholder={t('createPet.adopterEmailPlanceholder')}
-          />
+          {canBeChangeAdoptedStatus() && (
+            <BaseSelectInput
+              marginTop={10}
+              testId="user-adopted"
+              inputName="userAdopted"
+              setFieldValue={setFieldValue}
+              options={usersAdoptedEmailList}
+              value={values.userAdopted || ''}
+              label={t('createPet.userAdopterEmail')}
+              placeholder={t('createPet.adopterEmailPlanceholder')}
+            />
+          )}
           <BaseSelectInput
             testId="vet"
             marginTop={10}

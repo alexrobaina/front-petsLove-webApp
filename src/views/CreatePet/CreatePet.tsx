@@ -23,6 +23,7 @@ import {
 } from '../../store/slices/pet/getPet';
 import { updatePet, cleanErrorsUpdateAction } from '../../store/slices/pet/updatePet';
 import styles from './CreatePet.module.scss';
+import { USER_ADOPTER_ROLE, USER_VET_ROLE } from '../../constants/roles';
 
 const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
   const [titlePage, setTitlePage] = useState('createPet.createPet');
@@ -83,6 +84,8 @@ const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
     initialValues: FORM_STATE,
     validationSchema: validationCreatePet,
     onSubmit: (values: TValues) => {
+      const isAdopted = values.userAdopted !== '' ? 'true' : 'false';
+
       const newPet = {
         _id: '',
         userCreator,
@@ -90,13 +93,13 @@ const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
         imageDeleted: [],
         name: values.name,
         city: values.city,
+        adopted: isAdopted,
         color: values.color,
         weight: values.weight,
         images: values.images,
         gender: values.gender,
         userVet: values.userVet,
         country: values.country,
-        adopted: values.adopted,
         category: values.category,
         location: values.location,
         newImages: values.newImages,
@@ -105,6 +108,7 @@ const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
         userAdopted: values.userAdopted,
         medicalNotes: values.medicalNotes,
       };
+
       if (petId) {
         newPet.imageDeleted = imagesToDelete;
         newPet._id = petId;
@@ -137,6 +141,11 @@ const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
       }
     }
   }, [petSelected.data]);
+
+  const canBeChangeAdoptedStatus = (userRole: string) => {
+    if (userRole === USER_ADOPTER_ROLE || userRole === USER_VET_ROLE) return false;
+    return true;
+  };
 
   useEffect(() => {
     if (petId && updatePetSlice.success) {
@@ -197,6 +206,7 @@ const CreatePet: FC<ICreatePet> = ({ petId = '' }) => {
         goToDashboard={goToDashboard}
         usersAdoptedEmailList={usersAdopter}
         handleDeleteImages={handleDeleteImages}
+        canBeChangeAdoptedStatus={() => canBeChangeAdoptedStatus(user?.role)}
       />
     </Layout>
   );

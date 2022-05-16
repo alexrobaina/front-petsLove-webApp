@@ -5,6 +5,7 @@ import styles from './BaseButton.module.scss';
 interface Props {
   text?: string;
   type?: string;
+  color?: string;
   testId?: string;
   small?: boolean;
   large?: boolean;
@@ -19,13 +20,15 @@ interface Props {
   secundary?: boolean;
   isLoading?: boolean;
   marginBottom?: number;
-  isButtonLink?: boolean;
   transparent?: boolean;
+  isButtonLink?: boolean;
+  backgroundColor?: string;
 }
 
 const BaseButton: FC<Props> = ({
   text = '',
   type = '',
+  color = '',
   testId = '',
   icon = null,
   fontSize = 16,
@@ -39,6 +42,7 @@ const BaseButton: FC<Props> = ({
   disabled = false,
   isLoading = false,
   onClick = () => {},
+  backgroundColor = '',
   isButtonLink = false,
 }) => {
   const click = () => {
@@ -84,7 +88,7 @@ const BaseButton: FC<Props> = ({
         success && styles.buttonStateSuccess,
         disabled && styles.buttonStateDisabled,
       )}
-      style={{ marginTop, marginBottom }}
+      style={{ marginTop, marginBottom, backgroundColor, color }}
       type={type === 'submit' ? 'submit' : 'button'}
     >
       {icon && <div className={styles.icon}>{icon}</div>}

@@ -3,6 +3,7 @@ import { createSlice, createAction } from '@reduxjs/toolkit';
 const sliceName = 'dashboard';
 
 export const initialState = {
+  deletePet: { data: {}, isLoading: false, success: false },
   userDashboard: { data: {}, isLoading: false, success: false },
   petsDashboard: { pets: {}, isLoading: false, success: false },
 };
@@ -39,12 +40,29 @@ const dashboardSlice = createSlice({
       state.petsDashboard.isLoading = false;
       state.petsDashboard.pets = action.payload;
     },
+    deletePetStart(state) {
+      state.deletePet.data = {};
+      state.deletePet.isLoading = true;
+    },
+    deletePetSuccess(state, { payload }) {
+      state.deletePet.data = payload.data;
+      state.deletePet.success = true;
+      state.deletePet.isLoading = false;
+    },
+    deletePetFailure(state, action) {
+      state.deletePet.success = false;
+      state.deletePet.isLoading = false;
+      state.deletePet.data = action.payload;
+    },
   },
 });
 
 const { actions, reducer } = dashboardSlice;
 
 export const {
+  deletePetStart,
+  deletePetSuccess,
+  deletePetFailure,
   dashboardStart,
   dashboardSuccess,
   dashboardFailure,
@@ -54,10 +72,12 @@ export const {
 } = actions;
 
 export const dashboard = createAction<{ userId: string }>(`${sliceName}/dashboard`);
+export const deletePet = createAction<string>(`${sliceName}/deletePet`);
+
 export const filterDashboardPets = createAction<{
   userId: string;
   gender: string;
-  isAdopt: boolean;
+  isAdopted: boolean;
   namePet: string;
   limit: number;
   page: number;

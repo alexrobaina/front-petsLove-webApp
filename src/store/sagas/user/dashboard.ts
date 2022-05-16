@@ -6,6 +6,10 @@ import {
   dashboardStart,
   dashboardSuccess,
   dashboardFailure,
+  deletePet,
+  deletePetStart,
+  deletePetSuccess,
+  deletePetFailure,
   filterDashboardPets,
   filterDashboardPetsStart,
   filterDashboardPetsSuccess,
@@ -15,6 +19,7 @@ import {
 // Api
 import {
   dashboard as callServiceDashboard,
+  deletePet as callServiceDeletePet,
   filterDashboardPets as callServiceFilterDashboradPets,
 } from '../../api/user/dashboard';
 
@@ -39,7 +44,7 @@ export function* filterDashboardPetsWorker(data: {
   payload: {
     userId: string;
     gender: string;
-    isAdopt: boolean;
+    isAdopted: boolean;
     namePet: string;
     limit: number;
     page: number;
@@ -61,7 +66,21 @@ export function* filterDashboardPetsWorker(data: {
   }
 }
 
+export function* deletePetWorker(data: { payload: string }) {
+  try {
+    yield put(deletePetStart());
+
+    const response: { data: any } = yield call(callServiceDeletePet, data.payload);
+
+    yield put(deletePetSuccess(response));
+  } catch ({ response }) {
+    // @ts-ignore
+    yield put(deletePetFailure(response?.data || {}));
+  }
+}
+
 export default function* dashboardSagasRoot() {
   yield takeLatest(filterDashboardPets, filterDashboardPetsWorker);
   yield takeLatest(dashboard, dashboardWorker);
+  yield takeLatest(deletePet, deletePetWorker);
 }

@@ -61,6 +61,17 @@
   display: flex;
   width: 100%;
   margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.containerRadioButtons {
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  margin-left: 40px;
   gap: 30px;
-  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
